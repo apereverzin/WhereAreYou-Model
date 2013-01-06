@@ -6,8 +6,8 @@ import java.util.Set;
 
 import javax.mail.Message;
 
-import com.creek.emailaccess.connector.mail.ConnectorException;
-import com.creek.emailaccess.connector.mail.MailConnector;
+import com.creek.accessemail.connector.mail.ConnectorException;
+import com.creek.accessemail.connector.mail.MailConnector;
 import com.creek.whereareyoumodel.domain.UserLocationData;
 import com.creek.whereareyoumodel.message.TransformException;
 import com.creek.whereareyoumodel.util.MessageTransformer;

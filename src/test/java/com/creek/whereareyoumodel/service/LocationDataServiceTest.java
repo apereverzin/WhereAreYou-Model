@@ -14,8 +14,8 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willThrow;
 
-import com.creek.emailaccess.connector.mail.ConnectorException;
-import com.creek.emailaccess.connector.mail.MailConnector;
+import com.creek.accessemail.connector.mail.ConnectorException;
+import com.creek.accessemail.connector.mail.MailConnector;
 import com.creek.whereareyoumodel.domain.LocationData;
 import com.creek.whereareyoumodel.domain.UserId;
 import com.creek.whereareyoumodel.domain.UserLocationData;
