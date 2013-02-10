@@ -22,6 +22,8 @@ public class LocationDataService {
     
     static final String I_AM_HERE_SUBJECT = "IAmHere";
     
+    public static final String PRODUCT_VERSION = "1.0";
+
     public LocationDataService(Properties mailProps, MessageTransformer messageTransformer) {
         this.mailConnector = new MailConnector(mailProps);
         this.messageTransformer = messageTransformer;
