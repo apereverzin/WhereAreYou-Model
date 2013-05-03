@@ -1,6 +1,11 @@
 package com.creek.whereareyoumodel.message;
 
+import javax.mail.Message;
+
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.creek.whereareyoumodel.util.JSONTransformer;
 
 /**
  * 
@@ -8,21 +13,35 @@ import org.json.simple.JSONObject;
  *
  */
 public class GenericMessageTransformer {
-    public static GenericMessage transform(JSONObject jsonObject) throws TransformException {
+    private final JSONParser parser;
+    private final JSONTransformer transformer;
+
+    public GenericMessageTransformer(JSONParser parser, JSONTransformer transformer) {
+        this.parser = parser;
+        this.transformer = transformer;
+    }
+
+    public GenericMessage transform(Message msg) throws TransformException {
         int messageType;
-        
+
         try {
-            messageType = Integer.parseInt((String)jsonObject.get(AbstractMessage.MESSAGE_TYPE));
-        } catch(Exception ex) {
+            String content = (String) msg.getContent();
+            parser.parse(content, transformer);
+
+            JSONObject jsonObject = (JSONObject) transformer.getResult();
+            messageType = Integer.parseInt((String) jsonObject.get(AbstractMessage.MESSAGE_TYPE));
+
+            if (messageType == GenericMessage.OWNER_LOCATION_REQUEST_MESSAGE) {
+                return new OwnerLocationRequestMessage(jsonObject);
+            } else if (messageType == GenericMessage.OWNER_LOCATION_RESPONSE_MESSAGE) {
+                return new OwnerLocationResponseMessage(jsonObject);
+            } else if (messageType == GenericMessage.OWNER_LOCATION_DATA_MESSAGE) {
+                return new OwnerLocationDataMessage(jsonObject);
+            } else {
+                throw new TransformException("Unknown message type " + messageType);
+            }
+        } catch (Exception ex) {
             throw new TransformException(ex);
-        }
-        
-        if(messageType == GenericMessage.USER_LOCATION_MESSAGE) {
-            return new UserLocationMessage(jsonObject);
-        } else if(messageType == GenericMessage.USER_LOCATION_MESSAGE_CONFIRMATION) {
-            return new UserLocationConfirmationMessage(jsonObject);
-        } else {
-            throw new TransformException("Unknown message type " + messageType);
         }
     }
 }
