@@ -5,6 +5,7 @@ package com.creek.whereareyoumodel.domain;
  * @author andreypereverzin
  */
 public class ContactData {
+    private int id;
     private String email;
     private String contactId;
     private String displayName;
@@ -14,6 +15,14 @@ public class ContactData {
     private boolean locationRequestAgreed;
     private boolean locationRequestSent;
     private long sentLocationRequestTimestamp;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;

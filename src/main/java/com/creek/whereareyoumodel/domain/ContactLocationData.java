@@ -5,18 +5,34 @@ package com.creek.whereareyoumodel.domain;
  * @author Andrey Pereverzin
  */
 public class ContactLocationData {
-    private final ContactData contactData;
-    private final OwnerLocationData ownerLocationData;
-    private final long timeReceived;
+    private int id;
+    private int contactId;
+    private String contactEmail;
+    private OwnerLocationData ownerLocationData;
+    private long timeReceived;
 
-    public ContactLocationData(ContactData contactData, OwnerLocationData ownerLocationData) {
-        this.contactData = contactData;
-        this.ownerLocationData = ownerLocationData;
-        this.timeReceived = System.currentTimeMillis();
+    public int getId() {
+        return id;
     }
 
-    public ContactData getContactData() {
-        return contactData;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
+    }
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
     }
 
     public OwnerLocationData getOwnerLocationData() {
