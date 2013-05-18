@@ -39,7 +39,15 @@ public class ContactLocationData {
         return ownerLocationData;
     }
 
+    public void setOwnerLocationData(OwnerLocationData ownerLocationData) {
+        this.ownerLocationData = ownerLocationData;
+    }
+
     public long getTimeReceived() {
         return timeReceived;
+    }
+
+    public void setTimeReceived(long timeReceived) {
+        this.timeReceived = timeReceived;
     }
 }

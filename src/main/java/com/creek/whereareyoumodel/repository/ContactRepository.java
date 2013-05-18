@@ -1,6 +1,7 @@
 package com.creek.whereareyoumodel.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.creek.whereareyoumodel.domain.ContactData;
 
@@ -14,6 +15,7 @@ public interface ContactRepository {
     ContactData getContactDataByEmail(String email);
     ContactData getContactDataByContactId(String contactId);
     List<ContactData> getAllContactData();
+    Map<String, ContactData> getAllContactDataAsMap();
     boolean updateContactData(ContactData contactData);
     boolean deleteContactData(int id);
 }
