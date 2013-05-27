@@ -16,6 +16,11 @@ public class GenericMessageTransformer {
     private final JSONParser parser;
     private final JSONTransformer transformer;
 
+    public GenericMessageTransformer() {
+        this.parser = new JSONParser();
+        this.transformer = new JSONTransformer();
+    }
+
     public GenericMessageTransformer(JSONParser parser, JSONTransformer transformer) {
         this.parser = parser;
         this.transformer = transformer;

@@ -8,9 +8,7 @@ import com.creek.whereareyoumodel.domain.ContactLocationData;
  * 
  * @author andreypereverzin
  */
-public interface ContactLocationRepository {
-    ContactLocationData saveContactLocationData(ContactLocationData contactLocationData);
-    boolean deleteContactLocationData(int id);
+public interface ContactLocationRepository extends IdentifiableRepository<ContactLocationData> {
     List<ContactLocationData> getContactLocationDataByEmail(String email);
     ContactLocationData getLatestContactLocationDataByEmail(String email);
     List<ContactLocationData> getContactLocationDataByIdOfContact(String contactId);

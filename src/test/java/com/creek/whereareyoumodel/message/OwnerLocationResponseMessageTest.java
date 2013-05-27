@@ -25,7 +25,7 @@ public class OwnerLocationResponseMessageTest {
     @Test
     public void shouldTransformMessage() throws ParseException {
         long timestamp = System.currentTimeMillis();
-        ownerLocationResponse = new OwnerLocationResponse(EMAIL, timestamp, RESPONSE_CODE, RESPONSE_MESSAGE);  
+        ownerLocationResponse = new OwnerLocationResponse(timestamp, RESPONSE_CODE, RESPONSE_MESSAGE);  
         
         OwnerLocationResponseMessage message = new OwnerLocationResponseMessage(ownerLocationResponse, VERSION, EMAIL);
 
@@ -38,7 +38,6 @@ public class OwnerLocationResponseMessageTest {
         JSONObject value = (JSONObject) transformer.getResult();
 
         OwnerLocationResponseMessage messageRes = new OwnerLocationResponseMessage(value);
-        assertEquals(EMAIL, messageRes.getOwnerLocationResponse().getSenderEmail());
         assertEquals(timestamp, messageRes.getOwnerLocationResponse().getTimeSent());
         assertTrue(messageRes.getOwnerLocationResponse().getTimeSent() > 0);
         assertEquals(RESPONSE_CODE, messageRes.getOwnerLocationResponse().getResponseCode());

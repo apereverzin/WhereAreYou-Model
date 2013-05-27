@@ -9,13 +9,10 @@ import com.creek.whereareyoumodel.domain.ContactData;
  * 
  * @author andreypereverzin
  */
-public interface ContactRepository {
-    ContactData createContactData(ContactData contactData);
+public interface ContactDataRepository extends IdentifiableRepository<ContactData> {
     ContactData getContactDataById(int id);
     ContactData getContactDataByEmail(String email);
     ContactData getContactDataByContactId(String contactId);
     List<ContactData> getAllContactData();
     Map<String, ContactData> getAllContactDataAsMap();
-    boolean updateContactData(ContactData contactData);
-    boolean deleteContactData(int id);
 }

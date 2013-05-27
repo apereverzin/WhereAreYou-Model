@@ -21,11 +21,16 @@ import com.creek.whereareyoumodel.message.TransformException;
  */
 public class LocationMessagesService {
     private MailConnector mailConnector;
-    private GenericMessageTransformer messageTransformer;
+    private final GenericMessageTransformer messageTransformer;
     
     static final String WHERE_ARE_YOU_SUBJECT = "WhereAreYou";
     
     public static final String PRODUCT_VERSION = "1.0";
+
+    public LocationMessagesService(Properties mailProps) {
+        this.mailConnector = new MailConnector(mailProps);
+        this.messageTransformer = new GenericMessageTransformer();
+    }
 
     public LocationMessagesService(Properties mailProps, GenericMessageTransformer messageTransformer) {
         this.mailConnector = new MailConnector(mailProps);
