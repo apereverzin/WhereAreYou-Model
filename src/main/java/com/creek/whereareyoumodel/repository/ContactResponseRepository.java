@@ -12,4 +12,5 @@ public interface ContactResponseRepository extends IdentifiableRepository<Contac
     List<ContactResponse> getAllContactResponses();
     List<ContactResponse> getContactResponsesByContactId(String contactId);
     List<ContactResponse> getContactResponsesByEmail(String email);
+    List<ContactResponse> getUnsentContactResponses();
 }
