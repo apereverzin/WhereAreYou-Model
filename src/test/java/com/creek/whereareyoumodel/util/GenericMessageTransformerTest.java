@@ -19,14 +19,15 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willThrow;
 
 import com.creek.whereareyoumodel.domain.LocationData;
-import com.creek.whereareyoumodel.domain.OwnerLocationData;
-import com.creek.whereareyoumodel.domain.OwnerLocationRequest;
-import com.creek.whereareyoumodel.domain.OwnerLocationResponse;
+import com.creek.whereareyoumodel.message.AbstractMessage;
 import com.creek.whereareyoumodel.message.GenericMessageTransformer;
 import com.creek.whereareyoumodel.message.OwnerLocationDataMessage;
-import com.creek.whereareyoumodel.message.OwnerLocationRequestMessage;
-import com.creek.whereareyoumodel.message.OwnerLocationResponseMessage;
+import com.creek.whereareyoumodel.message.RequestMessage;
+import com.creek.whereareyoumodel.message.ResponseMessage;
 import com.creek.whereareyoumodel.message.TransformException;
+import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
+import com.creek.whereareyoumodel.valueobject.OwnerRequest;
+import com.creek.whereareyoumodel.valueobject.OwnerResponse;
 
 /**
  * 
@@ -47,10 +48,10 @@ public class GenericMessageTransformerTest {
     @Mock
     private JSONObject jsonObject;
     
-    private OwnerLocationRequestMessage ownerLocationRequestMessage;
-    private OwnerLocationRequest ownerLocationRequest;
-    private OwnerLocationResponseMessage ownerLocationResponseMessage;
-    private OwnerLocationResponse ownerLocationResponse;
+    private RequestMessage ownerLocationRequestMessage;
+    private OwnerRequest ownerLocationRequest;
+    private ResponseMessage ownerLocationResponseMessage;
+    private OwnerResponse ownerLocationResponse;
     private OwnerLocationDataMessage ownerLocationDataMessage;
     private OwnerLocationData ownerLocationData;
     private LocationData locationData;
@@ -63,11 +64,10 @@ public class GenericMessageTransformerTest {
     private static final float SPEED = 20.5f;
     private static final boolean HAS_ACCURACY = true;
     private static final boolean HAS_SPEED = true;
-    private static final String VERSION = "1.0";
     private static final int REQUEST_CODE = 2;
-    private static final String REQUEST_MESSAGE = "Request mesage";
+    private static final String REQUEST_MESSAGE = "Request message";
     private static final int RESPONSE_CODE = 5;
-    private static final String RESPONSE_MESSAGE = "Response mesage";
+    private static final String RESPONSE_MESSAGE = "Response message";
 
     @Before
     public void setUp() {
@@ -81,19 +81,19 @@ public class GenericMessageTransformerTest {
     @Test
     public void shouldTransformOwnerLocationRequestMessage() throws TransformException, MessagingException, IOException {
         // given
-        ownerLocationRequest = new OwnerLocationRequest(timestamp, REQUEST_CODE, REQUEST_MESSAGE);  
-        ownerLocationRequestMessage = new OwnerLocationRequestMessage(ownerLocationRequest, VERSION, EMAIL);
+        ownerLocationRequest = new OwnerRequest(timestamp, REQUEST_CODE, REQUEST_MESSAGE);  
+        ownerLocationRequestMessage = new RequestMessage(ownerLocationRequest, EMAIL);
         given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(ownerLocationRequestMessage.toJSON());
         
         // when
-        OwnerLocationRequestMessage msgReceived = (OwnerLocationRequestMessage)messageTransformer.transform(msg);
+        RequestMessage msgReceived = (RequestMessage)messageTransformer.transform(msg);
         
         // then
-        assertEquals(timestamp, msgReceived.getOwnerLocationRequest().getTimeSent());
-        assertEquals(REQUEST_CODE, msgReceived.getOwnerLocationRequest().getRequestCode());
-        assertEquals(REQUEST_MESSAGE, msgReceived.getOwnerLocationRequest().getMessage());
-        assertEquals(VERSION, msgReceived.getProductVersion());
+        assertEquals(timestamp, msgReceived.getOwnerRequest().getTimeSent());
+        assertEquals(REQUEST_CODE, msgReceived.getOwnerRequest().getCode());
+        assertEquals(REQUEST_MESSAGE, msgReceived.getOwnerRequest().getMessage());
+        assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, msgReceived.getProductVersion());
     }
     
     @Test
@@ -101,7 +101,7 @@ public class GenericMessageTransformerTest {
         // given
         locationData = new LocationData(ACCURACY, LATITUDE, LONGITUDE, SPEED, HAS_ACCURACY, HAS_SPEED);
         ownerLocationData = new OwnerLocationData(timestamp, locationData);  
-        ownerLocationDataMessage = new OwnerLocationDataMessage(ownerLocationData, VERSION, EMAIL);
+        ownerLocationDataMessage = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
         given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(ownerLocationDataMessage.toJSON());
         
@@ -117,25 +117,25 @@ public class GenericMessageTransformerTest {
         assertEquals(SPEED, msgReceived.getOwnerLocationData().getLocationData().getSpeed());
         assertEquals(HAS_ACCURACY, msgReceived.getOwnerLocationData().getLocationData().hasAccuracy());
         assertEquals(HAS_SPEED, msgReceived.getOwnerLocationData().getLocationData().hasSpeed());
-        assertEquals(VERSION, msgReceived.getProductVersion());
+        assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, msgReceived.getProductVersion());
     }
     
     @Test
     public void shouldTransformOwnerLocationResponseMessage() throws TransformException, MessagingException, IOException {
         // given
-        ownerLocationResponse = new OwnerLocationResponse(timestamp, RESPONSE_CODE, RESPONSE_MESSAGE);  
-        ownerLocationResponseMessage = new OwnerLocationResponseMessage(ownerLocationResponse, VERSION, EMAIL);
+        ownerLocationResponse = new OwnerResponse(timestamp, RESPONSE_CODE, RESPONSE_MESSAGE);  
+        ownerLocationResponseMessage = new ResponseMessage(ownerLocationResponse, EMAIL);
         given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(ownerLocationResponseMessage.toJSON());
         
         // when
-        OwnerLocationResponseMessage msgReceived = (OwnerLocationResponseMessage)messageTransformer.transform(msg);
+        ResponseMessage msgReceived = (ResponseMessage)messageTransformer.transform(msg);
         
         // then
-        assertEquals(timestamp, msgReceived.getOwnerLocationResponse().getTimeSent());
-        assertEquals(RESPONSE_CODE, msgReceived.getOwnerLocationResponse().getResponseCode());
-        assertEquals(RESPONSE_MESSAGE, msgReceived.getOwnerLocationResponse().getMessage());
-        assertEquals(VERSION, msgReceived.getProductVersion());
+        assertEquals(timestamp, msgReceived.getOwnerResponse().getTimeSent());
+        assertEquals(RESPONSE_CODE, msgReceived.getOwnerResponse().getCode());
+        assertEquals(RESPONSE_MESSAGE, msgReceived.getOwnerResponse().getMessage());
+        assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, msgReceived.getProductVersion());
     }
     
     @Test(expected=TransformException.class)

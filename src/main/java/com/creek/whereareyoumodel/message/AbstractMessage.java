@@ -8,6 +8,8 @@ import org.json.simple.JSONObject;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractMessage implements GenericMessage {
+    public static final String CURRENT_PRODUCT_VERSION = "1.0";
+    
     private final String productVersion;
     private final String senderEmail;
 
@@ -15,8 +17,8 @@ public abstract class AbstractMessage implements GenericMessage {
     static final String PRODUCT_VERSION = "productVersion";
     static final String SENDER_EMAIL = "senderEmail";
 
-    public AbstractMessage(String productVersion, String senderEmail) {
-        this.productVersion = productVersion;
+    public AbstractMessage(String senderEmail) {
+        this.productVersion = CURRENT_PRODUCT_VERSION;
         this.senderEmail = senderEmail;
     }
 
@@ -43,6 +45,7 @@ public abstract class AbstractMessage implements GenericMessage {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(MESSAGE_TYPE, Integer.toString(getMessageType()));
         jsonObject.put(PRODUCT_VERSION, productVersion);
+        jsonObject.put(SENDER_EMAIL, senderEmail);
         return jsonObject;
     }
 }

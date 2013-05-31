@@ -4,7 +4,7 @@ package com.creek.whereareyoumodel.domain;
  * 
  * @author andreypereverzin
  */
-public class AbstractRequestResponse extends AbstractIdentifiable implements Identifiable {
+public class RequestResponse extends AbstractIdentifiable implements Identifiable {
     private long timeCreated;
     private long timeSent;
     private long timeReceived;

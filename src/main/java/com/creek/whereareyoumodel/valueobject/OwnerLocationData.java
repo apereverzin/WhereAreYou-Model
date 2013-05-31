@@ -1,7 +1,8 @@
-package com.creek.whereareyoumodel.domain;
+package com.creek.whereareyoumodel.valueobject;
 
 import org.json.simple.JSONObject;
 
+import com.creek.whereareyoumodel.domain.LocationData;
 import com.creek.whereareyoumodel.message.Transformable;
 
 /**
@@ -9,25 +10,19 @@ import com.creek.whereareyoumodel.message.Transformable;
  * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public class OwnerLocationData implements Transformable {
-    private final long timeSent;
+public class OwnerLocationData extends AbstractOwnerData implements Transformable {
     private final LocationData locationData;
 
-    private static final String TIME_SENT = "timeSent";
     private static final String LOCATION_DATA = "locationData";
 
     public OwnerLocationData(long timeSent, LocationData locationData) {
-        this.timeSent = timeSent;
+        super(timeSent);
         this.locationData = locationData;
     }
 
     public OwnerLocationData(JSONObject jsonObject) {
-        this.timeSent = Long.parseLong((String) jsonObject.get(TIME_SENT));
+        super(jsonObject);
         this.locationData = new LocationData((JSONObject)jsonObject.get(LOCATION_DATA));
-    }
-
-    public long getTimeSent() {
-        return timeSent;
     }
 
     public LocationData getLocationData() {
@@ -37,8 +32,7 @@ public class OwnerLocationData implements Transformable {
     @Override
     @SuppressWarnings("unchecked")
     public JSONObject toJSON() {
-        JSONObject dataObject = new JSONObject();
-        dataObject.put(TIME_SENT, Long.toString(getTimeSent()));
+        JSONObject dataObject = super.toJSON();
         dataObject.put(LOCATION_DATA, locationData.toJSON());
         return dataObject;
     }

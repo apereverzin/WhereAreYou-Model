@@ -2,7 +2,7 @@ package com.creek.whereareyoumodel.message;
 
 import org.json.simple.JSONObject;
 
-import com.creek.whereareyoumodel.domain.OwnerLocationData;
+import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
 
 /**
  * 
@@ -14,8 +14,8 @@ public class OwnerLocationDataMessage extends AbstractMessage implements Generic
 
     private static final String OWNER_LOCATION = "ownerLocation";
 
-    public OwnerLocationDataMessage(OwnerLocationData userLocationData, String productVersion, String senderEmail) {
-        super(productVersion, senderEmail);
+    public OwnerLocationDataMessage(OwnerLocationData userLocationData, String senderEmail) {
+        super(senderEmail);
         this.ownerLocationData = userLocationData;
     }
 

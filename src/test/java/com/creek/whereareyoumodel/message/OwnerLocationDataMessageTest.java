@@ -8,8 +8,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.creek.whereareyoumodel.domain.LocationData;
-import com.creek.whereareyoumodel.domain.OwnerLocationData;
 import com.creek.whereareyoumodel.util.JSONTransformer;
+import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
 
 /**
  * 
@@ -23,7 +23,6 @@ public class OwnerLocationDataMessageTest {
     private static final float SPEED = 20.5f;
     private static final boolean HAS_ACCURACY = true;
     private static final boolean HAS_SPEED = true;
-    private static final String VERSION = "1.0";
     
     private OwnerLocationData ownerLocationData;
     private LocationData locationData;
@@ -34,7 +33,7 @@ public class OwnerLocationDataMessageTest {
         locationData = new LocationData(ACCURACY, LATITUDE, LONGITUDE, SPEED, HAS_ACCURACY, HAS_SPEED);
         ownerLocationData = new OwnerLocationData(timestamp, locationData);  
         
-        OwnerLocationDataMessage message = new OwnerLocationDataMessage(ownerLocationData, VERSION, EMAIL);
+        OwnerLocationDataMessage message = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
 
         JSONObject jsonGroup = message.toJSON();
         String s = jsonGroup.toString();
@@ -53,6 +52,6 @@ public class OwnerLocationDataMessageTest {
         assertEquals(SPEED, messageRes.getOwnerLocationData().getLocationData().getSpeed());
         assertEquals(HAS_ACCURACY, messageRes.getOwnerLocationData().getLocationData().hasAccuracy());
         assertEquals(HAS_SPEED, messageRes.getOwnerLocationData().getLocationData().hasSpeed());
-        assertEquals(VERSION, messageRes.getProductVersion());
+        assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, messageRes.getProductVersion());
     }
 }

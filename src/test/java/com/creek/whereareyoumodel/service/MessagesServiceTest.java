@@ -14,26 +14,22 @@ import org.mockito.Mock;
 import static org.mockito.Matchers.any;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willThrow;
 
 import com.creek.accessemail.connector.mail.ConnectorException;
 import com.creek.accessemail.connector.mail.MailConnector;
-import com.creek.whereareyoumodel.domain.OwnerLocationData;
-import com.creek.whereareyoumodel.domain.OwnerLocationRequest;
-import com.creek.whereareyoumodel.domain.OwnerLocationResponse;
 import com.creek.whereareyoumodel.message.GenericMessage;
 import com.creek.whereareyoumodel.message.GenericMessageTransformer;
 import com.creek.whereareyoumodel.message.OwnerLocationDataMessage;
-import com.creek.whereareyoumodel.message.OwnerLocationRequestMessage;
-import com.creek.whereareyoumodel.message.OwnerLocationResponseMessage;
+import com.creek.whereareyoumodel.message.RequestMessage;
+import com.creek.whereareyoumodel.message.ResponseMessage;
 import com.creek.whereareyoumodel.message.TransformException;
 
 /**
  * 
  * @author Andrey Pereverzin
  */
-public class LocationMessagesServiceTest {
-    private LocationMessagesService service;
+public class MessagesServiceTest {
+    private MessagesService service;
     
     private static final String EMAIL = "aa@bb.cc";
     private static final String LOCATION = "loc";
@@ -45,9 +41,9 @@ public class LocationMessagesServiceTest {
     private GenericMessageTransformer messageTransformer;
     
     @Mock
-    private OwnerLocationRequestMessage ownerLocationRequestMessage;
+    private RequestMessage ownerRequestMessage;
     @Mock
-    private OwnerLocationResponseMessage ownerLocationResponseMessage;
+    private ResponseMessage ownerResponseMessage;
     @Mock
     private OwnerLocationDataMessage ownerLocationDataMessage;
     
@@ -60,7 +56,7 @@ public class LocationMessagesServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         
-        service = new LocationMessagesService(new Properties(), messageTransformer);
+        service = new MessagesService(new Properties(), messageTransformer);
         service.setMailConnector(connector);
     }
     
@@ -70,8 +66,8 @@ public class LocationMessagesServiceTest {
         Set<Message> messages = new HashSet<Message>();
         messages.add(message1);
         messages.add(message2);
-        given(connector.receiveMessages(LocationMessagesService.WHERE_ARE_YOU_SUBJECT)).willReturn(messages);
-        given(messageTransformer.transform(any(Message.class))).willReturn(ownerLocationResponseMessage).willReturn(ownerLocationDataMessage);
+        given(connector.receiveMessages(MessagesService.WHERE_ARE_YOU_SUBJECT)).willReturn(messages);
+        given(messageTransformer.transform(any(Message.class))).willReturn(ownerResponseMessage).willReturn(ownerLocationDataMessage);
         
         // when
         Set<GenericMessage> messagesReceived = service.receiveMessages();
@@ -85,7 +81,7 @@ public class LocationMessagesServiceTest {
         // given
         Set<Message> messages = new HashSet<Message>();
         messages.add(message1);
-        given(connector.receiveMessages(LocationMessagesService.WHERE_ARE_YOU_SUBJECT)).willReturn(messages);
+        given(connector.receiveMessages(MessagesService.WHERE_ARE_YOU_SUBJECT)).willReturn(messages);
         given(messageTransformer.transform(any(Message.class))).willThrow(new TransformException(""));
         
         // when
@@ -98,7 +94,7 @@ public class LocationMessagesServiceTest {
     @Test(expected=ServiceException.class)
     public void shouldThrowServiceExceptionIfConnectorExceptionThrownWhenReceivingMessages() throws ConnectorException, ServiceException, TransformException {
         // given
-        given(connector.receiveMessages(LocationMessagesService.WHERE_ARE_YOU_SUBJECT)).willThrow(new ConnectorException(""));
+        given(connector.receiveMessages(MessagesService.WHERE_ARE_YOU_SUBJECT)).willThrow(new ConnectorException(""));
         
         // when
         service.receiveMessages();
@@ -111,10 +107,10 @@ public class LocationMessagesServiceTest {
     public void shouldSendOwnerLocationRequestMessageSuccessfully() throws ConnectorException, ServiceException, TransformException {
         // given
         String[] emailsTo = new String[]{};
-        given(ownerLocationRequestMessage.toJSON()).willReturn(new JSONObject());
+        given(ownerRequestMessage.toJSON()).willReturn(new JSONObject());
         
         // when
-        service.sendOwnerLocationRequestMessage(ownerLocationRequestMessage, emailsTo);
+        service.sendMessage(ownerRequestMessage, emailsTo);
         
         // then
     }
@@ -123,10 +119,10 @@ public class LocationMessagesServiceTest {
     public void shouldSendOwnerLocationResponseMessageSuccessfully() throws ConnectorException, ServiceException, TransformException {
         // given
         String[] emailsTo = new String[]{};
-        given(ownerLocationResponseMessage.toJSON()).willReturn(new JSONObject());
+        given(ownerResponseMessage.toJSON()).willReturn(new JSONObject());
         
         // when
-        service.sendOwnerLocationResponseMessage(ownerLocationResponseMessage, emailsTo);
+        service.sendMessage(ownerResponseMessage, emailsTo);
         
         // then
     }
@@ -138,7 +134,7 @@ public class LocationMessagesServiceTest {
         given(ownerLocationDataMessage.toJSON()).willReturn(new JSONObject());
         
         // when
-        service.sendOwnerLocationDataMessage(ownerLocationDataMessage, emailsTo);
+        service.sendMessage(ownerLocationDataMessage, emailsTo);
         
         // then
     }

@@ -10,22 +10,22 @@ public abstract class AbstractIdentifiable implements Identifiable {
     private ContactCompoundId contactCompoundId;
 
     @Override
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public final void setId(int id) {
         this.id = id;
     }
 
     @Override
-    public ContactCompoundId getContactCompoundId() {
+    public final ContactCompoundId getContactCompoundId() {
         return contactCompoundId;
     }
 
     @Override
-    public void setContactCompoundId(ContactCompoundId contactCompoundId) {
+    public final void setContactCompoundId(ContactCompoundId contactCompoundId) {
         this.contactCompoundId = contactCompoundId;
     }
 }

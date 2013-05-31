@@ -4,6 +4,6 @@ package com.creek.whereareyoumodel.domain;
  * 
  * @author andreypereverzin
  */
-public class ContactResponse extends AbstractRequestResponse implements Identifiable {
+public class ContactResponse extends RequestResponse implements Identifiable {
     //
 }

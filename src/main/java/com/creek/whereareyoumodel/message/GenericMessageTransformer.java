@@ -36,10 +36,10 @@ public class GenericMessageTransformer {
             JSONObject jsonObject = (JSONObject) transformer.getResult();
             messageType = Integer.parseInt((String) jsonObject.get(AbstractMessage.MESSAGE_TYPE));
 
-            if (messageType == GenericMessage.OWNER_LOCATION_REQUEST_MESSAGE) {
-                return new OwnerLocationRequestMessage(jsonObject);
-            } else if (messageType == GenericMessage.OWNER_LOCATION_RESPONSE_MESSAGE) {
-                return new OwnerLocationResponseMessage(jsonObject);
+            if (messageType == GenericMessage.REQUEST_MESSAGE) {
+                return new RequestMessage(jsonObject);
+            } else if (messageType == GenericMessage.RESPONSE_MESSAGE) {
+                return new ResponseMessage(jsonObject);
             } else if (messageType == GenericMessage.OWNER_LOCATION_DATA_MESSAGE) {
                 return new OwnerLocationDataMessage(jsonObject);
             } else {

@@ -8,52 +8,35 @@ import javax.mail.Message;
 
 import com.creek.accessemail.connector.mail.ConnectorException;
 import com.creek.accessemail.connector.mail.MailConnector;
+import com.creek.whereareyoumodel.message.AbstractMessage;
 import com.creek.whereareyoumodel.message.GenericMessage;
 import com.creek.whereareyoumodel.message.GenericMessageTransformer;
 import com.creek.whereareyoumodel.message.OwnerLocationDataMessage;
-import com.creek.whereareyoumodel.message.OwnerLocationRequestMessage;
-import com.creek.whereareyoumodel.message.OwnerLocationResponseMessage;
+import com.creek.whereareyoumodel.message.RequestMessage;
+import com.creek.whereareyoumodel.message.ResponseMessage;
 import com.creek.whereareyoumodel.message.TransformException;
 
 /**
  * 
  * @author Andrey Pereverzin
  */
-public class LocationMessagesService {
+public class MessagesService {
     private MailConnector mailConnector;
     private final GenericMessageTransformer messageTransformer;
     
     static final String WHERE_ARE_YOU_SUBJECT = "WhereAreYou";
-    
-    public static final String PRODUCT_VERSION = "1.0";
 
-    public LocationMessagesService(Properties mailProps) {
+    public MessagesService(Properties mailProps) {
         this.mailConnector = new MailConnector(mailProps);
         this.messageTransformer = new GenericMessageTransformer();
     }
 
-    public LocationMessagesService(Properties mailProps, GenericMessageTransformer messageTransformer) {
+    public MessagesService(Properties mailProps, GenericMessageTransformer messageTransformer) {
         this.mailConnector = new MailConnector(mailProps);
         this.messageTransformer = messageTransformer;
     }
     
-    public void sendOwnerLocationDataMessage(OwnerLocationDataMessage message, String[] emails) throws ServiceException {
-        try {
-            mailConnector.sendMessage(WHERE_ARE_YOU_SUBJECT, message.getSenderEmail(), message.toJSON().toString(), emails);
-        } catch(ConnectorException ex) {
-            throw new ServiceException(ex);
-        }
-    }
-    
-    public void sendOwnerLocationRequestMessage(OwnerLocationRequestMessage message, String[] emails) throws ServiceException {
-        try {
-            mailConnector.sendMessage(WHERE_ARE_YOU_SUBJECT, message.getSenderEmail(), message.toJSON().toString(), emails);
-        } catch(ConnectorException ex) {
-            throw new ServiceException(ex);
-        }
-    }
-    
-    public void sendOwnerLocationResponseMessage(OwnerLocationResponseMessage message, String[] emails) throws ServiceException {
+    public void sendMessage(AbstractMessage message, String... emails) throws ServiceException {
         try {
             mailConnector.sendMessage(WHERE_ARE_YOU_SUBJECT, message.getSenderEmail(), message.toJSON().toString(), emails);
         } catch(ConnectorException ex) {

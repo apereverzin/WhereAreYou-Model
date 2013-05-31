@@ -1,5 +1,7 @@
 package com.creek.whereareyoumodel.domain;
 
+import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
+
 /**
  * 
  * @author Andrey Pereverzin
