@@ -11,9 +11,6 @@ import com.creek.accessemail.connector.mail.MailConnector;
 import com.creek.whereareyoumodel.message.AbstractMessage;
 import com.creek.whereareyoumodel.message.GenericMessage;
 import com.creek.whereareyoumodel.message.GenericMessageTransformer;
-import com.creek.whereareyoumodel.message.OwnerLocationDataMessage;
-import com.creek.whereareyoumodel.message.RequestMessage;
-import com.creek.whereareyoumodel.message.ResponseMessage;
 import com.creek.whereareyoumodel.message.TransformException;
 
 /**

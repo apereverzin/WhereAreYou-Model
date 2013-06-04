@@ -2,6 +2,7 @@ package com.creek.whereareyoumodel.valueobject;
 
 import org.json.simple.JSONObject;
 
+import com.creek.whereareyoumodel.domain.RequestResponse;
 import com.creek.whereareyoumodel.message.Transformable;
 
 /**
@@ -17,10 +18,10 @@ public class OwnerRequestResponse extends AbstractOwnerData implements Transform
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
 
-    public OwnerRequestResponse(long timeSent, int code, String message) {
-        super(timeSent);
-        this.message = message;
-        this.code = code;
+    public OwnerRequestResponse(RequestResponse requestResponse) {
+        super(requestResponse.getTimeSent());
+        this.message = requestResponse.getMessage();
+        this.code = requestResponse.getCode();
     }
 
     public OwnerRequestResponse(JSONObject jsonObject) {

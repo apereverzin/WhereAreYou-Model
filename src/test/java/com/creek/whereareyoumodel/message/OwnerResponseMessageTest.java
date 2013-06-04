@@ -7,8 +7,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.creek.whereareyoumodel.domain.RequestResponse;
 import com.creek.whereareyoumodel.util.JSONTransformer;
-import com.creek.whereareyoumodel.valueobject.OwnerResponse;
+import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
 
 /**
  * 
@@ -19,15 +20,21 @@ public class OwnerResponseMessageTest {
     private static final int RESPONSE_CODE = 6;
     private static final String RESPONSE_MESSAGE = "Response message";
     
-    private OwnerResponse ownerResponse;
+    private OwnerRequestResponse ownerResponse;
     
     @Test
     public void shouldTransformMessage() throws ParseException {
+        // given
         long timestamp = System.currentTimeMillis();
-        ownerResponse = new OwnerResponse(timestamp, RESPONSE_CODE, RESPONSE_MESSAGE);  
+        RequestResponse contactResponse = new RequestResponse();
+        contactResponse.setTimeSent(timestamp);
+        contactResponse.setCode(RESPONSE_CODE);
+        contactResponse.setMessage(RESPONSE_MESSAGE);
+        ownerResponse = new OwnerRequestResponse(contactResponse);  
         
         ResponseMessage message = new ResponseMessage(ownerResponse, EMAIL);
 
+        // when
         JSONObject jsonMessage = message.toJSON();
         String s = jsonMessage.toString();
         JSONParser parser = new JSONParser();
@@ -36,11 +43,12 @@ public class OwnerResponseMessageTest {
 
         JSONObject value = (JSONObject) transformer.getResult();
 
+        // then
         ResponseMessage messageRes = new ResponseMessage(value);
-        assertEquals(timestamp, messageRes.getOwnerResponse().getTimeSent());
-        assertTrue(messageRes.getOwnerResponse().getTimeSent() > 0);
-        assertEquals(RESPONSE_CODE, messageRes.getOwnerResponse().getCode());
-        assertEquals(RESPONSE_MESSAGE, messageRes.getOwnerResponse().getMessage());
+        assertEquals(timestamp, messageRes.getOwnerRequestResponse().getTimeSent());
+        assertTrue(messageRes.getOwnerRequestResponse().getTimeSent() > 0);
+        assertEquals(RESPONSE_CODE, messageRes.getOwnerRequestResponse().getCode());
+        assertEquals(RESPONSE_MESSAGE, messageRes.getOwnerRequestResponse().getMessage());
         assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, messageRes.getProductVersion());
     }
 }

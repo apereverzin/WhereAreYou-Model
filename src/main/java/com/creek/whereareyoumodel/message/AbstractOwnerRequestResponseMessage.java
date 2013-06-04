@@ -9,32 +9,30 @@ import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
  * @author andreypereverzin
  */
 @SuppressWarnings("serial")
-public abstract class AbstractOwnerRequestResponseMessage<T extends OwnerRequestResponse> extends AbstractMessage {
-    private final T t;
+public abstract class AbstractOwnerRequestResponseMessage extends AbstractMessage {
+    private final OwnerRequestResponse ownerRequestResponse;
     
     private static final String PAYLOAD = "payload";
 
-    public AbstractOwnerRequestResponseMessage(T t, String senderEmail) {
+    public AbstractOwnerRequestResponseMessage(OwnerRequestResponse ownerRequestResponse, String senderEmail) {
         super(senderEmail);
-        this.t  = t;
+        this.ownerRequestResponse = ownerRequestResponse;
     }
 
     public AbstractOwnerRequestResponseMessage(JSONObject jsonObject) {
         super(jsonObject);
-        t = createPayload((JSONObject) jsonObject.get(PAYLOAD));
+        ownerRequestResponse = new OwnerRequestResponse((JSONObject) jsonObject.get(PAYLOAD));
     }
     
-    protected final T getPayload() {
-        return t;
+    public final OwnerRequestResponse getOwnerRequestResponse() {
+        return ownerRequestResponse;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public JSONObject toJSON() {
         JSONObject jsonObject = super.toJSON();
-        jsonObject.put(PAYLOAD, t.toJSON());
+        jsonObject.put(PAYLOAD, ownerRequestResponse.toJSON());
         return jsonObject;
     }
-    
-    protected abstract T createPayload(JSONObject jsonObject);
 }

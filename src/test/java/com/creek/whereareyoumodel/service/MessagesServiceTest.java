@@ -31,9 +31,6 @@ import com.creek.whereareyoumodel.message.TransformException;
 public class MessagesServiceTest {
     private MessagesService service;
     
-    private static final String EMAIL = "aa@bb.cc";
-    private static final String LOCATION = "loc";
-
     @Mock
     private MailConnector connector;
     

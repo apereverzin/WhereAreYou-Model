@@ -2,15 +2,15 @@ package com.creek.whereareyoumodel.message;
 
 import org.json.simple.JSONObject;
 
-import com.creek.whereareyoumodel.valueobject.OwnerRequest;
+import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
 
 /**
  * 
  * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public class RequestMessage extends AbstractOwnerRequestResponseMessage<OwnerRequest> implements GenericMessage {
-    public RequestMessage(OwnerRequest ownerRequest, String senderEmail) {
+public class RequestMessage extends AbstractOwnerRequestResponseMessage implements GenericMessage {
+    public RequestMessage(OwnerRequestResponse ownerRequest, String senderEmail) {
         super(ownerRequest, senderEmail);
     }
 
@@ -18,16 +18,7 @@ public class RequestMessage extends AbstractOwnerRequestResponseMessage<OwnerReq
         super(jsonObject);
     }
 
-    public OwnerRequest getOwnerRequest() {
-        return getPayload();
-    }
-
     public final int getMessageType() {
         return REQUEST_MESSAGE;
-    }
-
-    @Override
-    protected OwnerRequest createPayload(JSONObject jsonObject) {
-        return new OwnerRequest(jsonObject);
     }
 }
