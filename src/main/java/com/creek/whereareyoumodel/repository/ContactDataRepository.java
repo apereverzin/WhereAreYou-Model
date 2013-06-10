@@ -7,7 +7,7 @@ import com.creek.whereareyoumodel.domain.ContactData;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 public interface ContactDataRepository extends IdentifiableRepository<ContactData> {
     ContactData getContactDataById(int id);

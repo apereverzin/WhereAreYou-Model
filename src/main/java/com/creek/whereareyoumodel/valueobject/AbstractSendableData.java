@@ -6,19 +6,19 @@ import com.creek.whereareyoumodel.message.Transformable;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public abstract class AbstractOwnerData implements Transformable {
+public abstract class AbstractSendableData implements Transformable {
     private final long timeSent;
 
     private static final String TIME_SENT = "timeSent";
 
-    public AbstractOwnerData(long timeSent) {
+    public AbstractSendableData(long timeSent) {
         this.timeSent = timeSent;
     }
 
-    public AbstractOwnerData(JSONObject jsonObject) {
+    public AbstractSendableData(JSONObject jsonObject) {
         this.timeSent = Long.parseLong((String) jsonObject.get(TIME_SENT));
     }
     

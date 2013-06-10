@@ -2,15 +2,15 @@ package com.creek.whereareyoumodel.domain;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 public class ContactCompoundId {
-    private String contactId;
-    private String contactEmail;
+    private final String contactId;
+    private final String contactEmail;
 
     public ContactCompoundId(String contactId, String contactEmail) {
-        this.contactEmail = contactEmail;
         this.contactId = contactId;
+        this.contactEmail = contactEmail;
     }
 
     public String getContactId() {

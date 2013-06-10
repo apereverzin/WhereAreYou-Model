@@ -19,14 +19,14 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willThrow;
 
 import com.creek.whereareyoumodel.domain.LocationData;
-import com.creek.whereareyoumodel.domain.RequestResponse;
+import com.creek.whereareyoumodel.domain.sendable.ContactResponse;
 import com.creek.whereareyoumodel.message.AbstractMessage;
 import com.creek.whereareyoumodel.message.GenericMessageTransformer;
 import com.creek.whereareyoumodel.message.OwnerLocationDataMessage;
 import com.creek.whereareyoumodel.message.RequestMessage;
 import com.creek.whereareyoumodel.message.ResponseMessage;
 import com.creek.whereareyoumodel.message.TransformException;
-import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
+import com.creek.whereareyoumodel.valueobject.SendableLocationData;
 import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
 
 /**
@@ -53,7 +53,7 @@ public class GenericMessageTransformerTest {
     private ResponseMessage responseMessage;
     private OwnerRequestResponse ownerResponse;
     private OwnerLocationDataMessage ownerLocationDataMessage;
-    private OwnerLocationData ownerLocationData;
+    private SendableLocationData ownerLocationData;
     private LocationData locationData;
     private long timestamp;
 
@@ -81,7 +81,7 @@ public class GenericMessageTransformerTest {
     @Test
     public void shouldTransformOwnerLocationRequestMessage() throws TransformException, MessagingException, IOException {
         // given
-        RequestResponse contactRequest = new RequestResponse();
+        ContactResponse contactRequest = new ContactResponse();
         contactRequest.setTimeSent(timestamp);
         contactRequest.setCode(REQUEST_CODE);
         contactRequest.setMessage(REQUEST_MESSAGE);
@@ -104,7 +104,7 @@ public class GenericMessageTransformerTest {
     public void shouldTransformOwnerLocationDataMessage() throws TransformException, MessagingException, IOException {
         // given
         locationData = new LocationData(ACCURACY, LATITUDE, LONGITUDE, SPEED, HAS_ACCURACY, HAS_SPEED);
-        ownerLocationData = new OwnerLocationData(timestamp, locationData);  
+        ownerLocationData = new SendableLocationData(timestamp, locationData);  
         ownerLocationDataMessage = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
         given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(ownerLocationDataMessage.toJSON());
@@ -127,7 +127,7 @@ public class GenericMessageTransformerTest {
     @Test
     public void shouldTransformOwnerLocationResponseMessage() throws TransformException, MessagingException, IOException {
         // given
-        RequestResponse contactResponse = new RequestResponse();
+        ContactResponse contactResponse = new ContactResponse();
         contactResponse.setTimeSent(timestamp);
         contactResponse.setCode(RESPONSE_CODE);
         contactResponse.setMessage(RESPONSE_MESSAGE);

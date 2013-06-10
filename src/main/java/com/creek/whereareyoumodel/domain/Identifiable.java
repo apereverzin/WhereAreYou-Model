@@ -2,7 +2,7 @@ package com.creek.whereareyoumodel.domain;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 public interface Identifiable {
     int getId();

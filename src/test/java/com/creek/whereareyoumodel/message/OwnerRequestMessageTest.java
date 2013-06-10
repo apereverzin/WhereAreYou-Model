@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.creek.whereareyoumodel.domain.RequestResponse;
+import com.creek.whereareyoumodel.domain.sendable.ContactResponse;
 import com.creek.whereareyoumodel.util.JSONTransformer;
 import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
 
@@ -26,7 +26,7 @@ public class OwnerRequestMessageTest {
     public void shouldTransformMessage() throws ParseException {
         // given
         long timestamp = System.currentTimeMillis();
-        RequestResponse contactRequest = new RequestResponse();
+        ContactResponse contactRequest = new ContactResponse();
         contactRequest.setTimeSent(timestamp);
         contactRequest.setCode(REQUEST_CODE);
         contactRequest.setMessage(REQUEST_MESSAGE);

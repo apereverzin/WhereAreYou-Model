@@ -6,7 +6,7 @@ import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
 public abstract class AbstractOwnerRequestResponseMessage extends AbstractMessage {

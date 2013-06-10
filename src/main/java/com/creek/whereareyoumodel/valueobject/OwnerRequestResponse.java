@@ -2,15 +2,15 @@ package com.creek.whereareyoumodel.valueobject;
 
 import org.json.simple.JSONObject;
 
-import com.creek.whereareyoumodel.domain.RequestResponse;
+import com.creek.whereareyoumodel.domain.sendable.GenericRequestResponse;
 import com.creek.whereareyoumodel.message.Transformable;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public class OwnerRequestResponse extends AbstractOwnerData implements Transformable {
+public class OwnerRequestResponse extends AbstractSendableData implements Transformable {
 
     private final int code;
     private final String message;
@@ -18,7 +18,7 @@ public class OwnerRequestResponse extends AbstractOwnerData implements Transform
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
 
-    public OwnerRequestResponse(RequestResponse requestResponse) {
+    public OwnerRequestResponse(GenericRequestResponse requestResponse) {
         super(requestResponse.getTimeSent());
         this.message = requestResponse.getMessage();
         this.code = requestResponse.getCode();

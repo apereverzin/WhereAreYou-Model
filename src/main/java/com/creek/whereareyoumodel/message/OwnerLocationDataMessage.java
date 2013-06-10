@@ -2,7 +2,7 @@ package com.creek.whereareyoumodel.message;
 
 import org.json.simple.JSONObject;
 
-import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
+import com.creek.whereareyoumodel.valueobject.SendableLocationData;
 
 /**
  * 
@@ -10,21 +10,21 @@ import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
  */
 @SuppressWarnings("serial")
 public class OwnerLocationDataMessage extends AbstractMessage implements GenericMessage {
-    private OwnerLocationData ownerLocationData;
+    private SendableLocationData ownerLocationData;
 
     private static final String OWNER_LOCATION = "ownerLocation";
 
-    public OwnerLocationDataMessage(OwnerLocationData userLocationData, String senderEmail) {
+    public OwnerLocationDataMessage(SendableLocationData userLocationData, String senderEmail) {
         super(senderEmail);
         this.ownerLocationData = userLocationData;
     }
 
     public OwnerLocationDataMessage(JSONObject jsonObject) {
         super(jsonObject);
-        this.ownerLocationData = new OwnerLocationData((JSONObject) jsonObject.get(OWNER_LOCATION));
+        this.ownerLocationData = new SendableLocationData((JSONObject) jsonObject.get(OWNER_LOCATION));
     }
 
-    public OwnerLocationData getOwnerLocationData() {
+    public SendableLocationData getOwnerLocationData() {
         return ownerLocationData;
     }
 

@@ -1,15 +1,19 @@
-package com.creek.whereareyoumodel.domain;
+package com.creek.whereareyoumodel.domain.sendable;
+
+import com.creek.whereareyoumodel.domain.AbstractIdentifiable;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
-public class RequestResponse extends AbstractIdentifiable implements Identifiable {
+public abstract class AbstractSendable extends AbstractIdentifiable {
+    public static final int SUCCESS = 0;
+    public static final int FAILURE = -1;
+
     private long timeCreated;
     private long timeSent;
     private long timeReceived;
-    private int code;
-    private String message;
+    private int resultCode;
 
     public long getTimeCreated() {
         return timeCreated;
@@ -35,19 +39,11 @@ public class RequestResponse extends AbstractIdentifiable implements Identifiabl
         this.timeReceived = timeReceived;
     }
 
-    public int getCode() {
-        return code;
+    public int getResultCode() {
+        return resultCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
     }
 }

@@ -2,11 +2,11 @@ package com.creek.whereareyoumodel.repository;
 
 import java.util.List;
 
-import com.creek.whereareyoumodel.domain.ContactLocationData;
+import com.creek.whereareyoumodel.domain.sendable.ContactLocationData;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 public interface ContactLocationRepository extends IdentifiableRepository<ContactLocationData> {
     List<ContactLocationData> getContactLocationDataByEmail(String email);

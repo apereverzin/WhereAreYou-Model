@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.creek.whereareyoumodel.domain.LocationData;
 import com.creek.whereareyoumodel.util.JSONTransformer;
-import com.creek.whereareyoumodel.valueobject.OwnerLocationData;
+import com.creek.whereareyoumodel.valueobject.SendableLocationData;
 
 /**
  * 
@@ -24,14 +24,14 @@ public class OwnerLocationDataMessageTest {
     private static final boolean HAS_ACCURACY = true;
     private static final boolean HAS_SPEED = true;
     
-    private OwnerLocationData ownerLocationData;
+    private SendableLocationData ownerLocationData;
     private LocationData locationData;
     
     @Test
     public void shouldTransformMessage() throws ParseException {
         long timestamp = System.currentTimeMillis();
         locationData = new LocationData(ACCURACY, LATITUDE, LONGITUDE, SPEED, HAS_ACCURACY, HAS_SPEED);
-        ownerLocationData = new OwnerLocationData(timestamp, locationData);  
+        ownerLocationData = new SendableLocationData(timestamp, locationData);  
         
         OwnerLocationDataMessage message = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
 

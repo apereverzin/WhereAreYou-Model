@@ -10,17 +10,17 @@ import com.creek.whereareyoumodel.message.Transformable;
  * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public class OwnerLocationData extends AbstractOwnerData implements Transformable {
+public class SendableLocationData extends AbstractSendableData implements Transformable {
     private final LocationData locationData;
 
     private static final String LOCATION_DATA = "locationData";
 
-    public OwnerLocationData(long timeSent, LocationData locationData) {
+    public SendableLocationData(long timeSent, LocationData locationData) {
         super(timeSent);
         this.locationData = locationData;
     }
 
-    public OwnerLocationData(JSONObject jsonObject) {
+    public SendableLocationData(JSONObject jsonObject) {
         super(jsonObject);
         this.locationData = new LocationData((JSONObject)jsonObject.get(LOCATION_DATA));
     }

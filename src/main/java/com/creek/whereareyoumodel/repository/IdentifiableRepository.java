@@ -4,7 +4,7 @@ import com.creek.whereareyoumodel.domain.Identifiable;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
 public interface IdentifiableRepository<T extends Identifiable> {
     Identifiable create(T identifiable);

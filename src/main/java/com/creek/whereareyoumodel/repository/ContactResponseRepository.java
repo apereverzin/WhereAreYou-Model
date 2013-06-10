@@ -2,15 +2,15 @@ package com.creek.whereareyoumodel.repository;
 
 import java.util.List;
 
-import com.creek.whereareyoumodel.domain.RequestResponse;
+import com.creek.whereareyoumodel.domain.sendable.ContactResponse;
 
 /**
  * 
- * @author andreypereverzin
+ * @author Andrey Pereverzin
  */
-public interface ContactResponseRepository extends IdentifiableRepository<RequestResponse> {
-    List<RequestResponse> getAllContactResponses();
-    List<RequestResponse> getContactResponsesByContactId(String contactId);
-    List<RequestResponse> getContactResponsesByEmail(String email);
-    List<RequestResponse> getUnsentContactResponses();
+public interface ContactResponseRepository extends IdentifiableRepository<ContactResponse> {
+    List<ContactResponse> getAllContactResponses();
+    List<ContactResponse> getContactResponsesByContactId(String contactId);
+    List<ContactResponse> getContactResponsesByEmail(String email);
+    List<ContactResponse> getUnsentContactResponses();
 }
