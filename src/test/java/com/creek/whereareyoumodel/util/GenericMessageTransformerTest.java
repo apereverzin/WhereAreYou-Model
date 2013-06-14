@@ -103,7 +103,14 @@ public class GenericMessageTransformerTest {
     @Test
     public void shouldTransformOwnerLocationDataMessage() throws TransformException, MessagingException, IOException {
         // given
-        locationData = new LocationData(ACCURACY, LATITUDE, LONGITUDE, SPEED, HAS_ACCURACY, HAS_SPEED);
+        locationData = new LocationData();
+        locationData.setLocationTime(System.currentTimeMillis());
+        locationData.setAccuracy(ACCURACY);
+        locationData.setLatitude(LATITUDE);
+        locationData.setLongitude(LONGITUDE);
+        locationData.setSpeed(SPEED);
+        locationData.setHasAccuracy(HAS_ACCURACY);
+        locationData.setHasSpeed(HAS_SPEED);
         ownerLocationData = new SendableLocationData(timestamp, locationData);  
         ownerLocationDataMessage = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
         given(msg.getContent()).willReturn("");

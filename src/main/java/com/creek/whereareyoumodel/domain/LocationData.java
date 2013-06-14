@@ -9,14 +9,14 @@ import com.creek.whereareyoumodel.message.Transformable;
  * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public class LocationData implements Transformable {
-    private final long locationTime;
-    private final float accuracy;
-    private final double latitude;
-    private final double longitude;
-    private final float speed;
-    private final boolean hasAccuracy;
-    private final boolean hasSpeed;
+public class LocationData extends AbstractIdentifiable implements Transformable, Identifiable {
+    private long locationTime;
+    private float accuracy;
+    private double latitude;
+    private double longitude;
+    private float speed;
+    private boolean hasAccuracy;
+    private boolean hasSpeed;
 
     private static final String LOCATION_TIME = "locationTime";
     private static final String ACCURACY = "accuracy";
@@ -26,14 +26,8 @@ public class LocationData implements Transformable {
     private static final String HAS_ACCURACY = "hasAccuracy";
     private static final String HAS_SPEED = "hasSpeed";
 
-    public LocationData(float accuracy, double latitude, double longitude, float speed, boolean hasAccuracy, boolean hasSpeed) {
-        this.locationTime = System.currentTimeMillis();
-        this.accuracy = accuracy;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.speed = speed;
-        this.hasAccuracy = hasAccuracy;
-        this.hasSpeed = hasSpeed;
+    public LocationData() {
+        super();
     }
 
     public LocationData(JSONObject jsonObject) {
@@ -50,28 +44,56 @@ public class LocationData implements Transformable {
         return locationTime;
     }
 
+    public void setLocationTime(long locationTime) {
+        this.locationTime = locationTime;
+    }
+
     public float getAccuracy() {
         return accuracy;
+    }
+
+    public void setAccuracy(float accuracy) {
+        this.accuracy = accuracy;
     }
 
     public double getLatitude() {
         return latitude;
     }
 
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     public double getLongitude() {
         return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public float getSpeed() {
         return speed;
     }
 
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
     public boolean hasAccuracy() {
         return hasAccuracy;
     }
 
+    public void setHasAccuracy(boolean hasAccuracy) {
+        this.hasAccuracy = hasAccuracy;
+    }
+
     public boolean hasSpeed() {
         return hasSpeed;
+    }
+
+    public void setHasSpeed(boolean hasSpeed) {
+        this.hasSpeed = hasSpeed;
     }
 
     @Override

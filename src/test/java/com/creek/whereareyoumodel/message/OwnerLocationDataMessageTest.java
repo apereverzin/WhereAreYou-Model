@@ -29,12 +29,21 @@ public class OwnerLocationDataMessageTest {
     
     @Test
     public void shouldTransformMessage() throws ParseException {
+        // given
         long timestamp = System.currentTimeMillis();
-        locationData = new LocationData(ACCURACY, LATITUDE, LONGITUDE, SPEED, HAS_ACCURACY, HAS_SPEED);
+        locationData = new LocationData();
+        locationData.setLocationTime(System.currentTimeMillis());
+        locationData.setAccuracy(ACCURACY);
+        locationData.setLatitude(LATITUDE);
+        locationData.setLongitude(LONGITUDE);
+        locationData.setSpeed(SPEED);
+        locationData.setHasAccuracy(HAS_ACCURACY);
+        locationData.setHasSpeed(HAS_SPEED);
         ownerLocationData = new SendableLocationData(timestamp, locationData);  
         
         OwnerLocationDataMessage message = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
 
+        // when
         JSONObject jsonGroup = message.toJSON();
         String s = jsonGroup.toString();
         JSONParser parser = new JSONParser();
@@ -42,7 +51,8 @@ public class OwnerLocationDataMessageTest {
         parser.parse(s, transformer);
 
         JSONObject value = (JSONObject) transformer.getResult();
-
+        
+        // then
         OwnerLocationDataMessage messageRes = new OwnerLocationDataMessage(value);
         assertEquals(timestamp, messageRes.getOwnerLocationData().getTimeSent());
         assertTrue(messageRes.getOwnerLocationData().getLocationData().getLocationTime() > 0);

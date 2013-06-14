@@ -14,6 +14,7 @@ public abstract class AbstractSendable extends AbstractIdentifiable {
     private long timeSent;
     private long timeReceived;
     private int resultCode;
+    private boolean processed;
 
     public long getTimeCreated() {
         return timeCreated;
@@ -45,5 +46,13 @@ public abstract class AbstractSendable extends AbstractIdentifiable {
 
     public void setResultCode(int resultCode) {
         this.resultCode = resultCode;
+    }
+
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 }

@@ -9,7 +9,7 @@ import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
  * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public class RequestMessage extends AbstractOwnerRequestResponseMessage implements GenericMessage {
+public class RequestMessage extends AbstractOwnerRequestResponseMessage {
     public RequestMessage(OwnerRequestResponse ownerRequest, String senderEmail) {
         super(ownerRequest, senderEmail);
     }

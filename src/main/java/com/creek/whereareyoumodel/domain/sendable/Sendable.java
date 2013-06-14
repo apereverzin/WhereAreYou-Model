@@ -15,4 +15,6 @@ public interface Sendable extends Identifiable {
     void setTimeReceived(long timeReceived);
     int getResultCode();
     void setResultCode(int resultCode);
+    boolean isProcessed();
+    void setProcessed(boolean processed);
 }

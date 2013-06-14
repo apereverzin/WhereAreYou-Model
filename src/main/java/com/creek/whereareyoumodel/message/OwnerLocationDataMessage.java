@@ -9,7 +9,7 @@ import com.creek.whereareyoumodel.valueobject.SendableLocationData;
  * @author Andrey Pereverzin
  */
 @SuppressWarnings("serial")
-public class OwnerLocationDataMessage extends AbstractMessage implements GenericMessage {
+public class OwnerLocationDataMessage extends AbstractMessage {
     private SendableLocationData ownerLocationData;
 
     private static final String OWNER_LOCATION = "ownerLocation";
