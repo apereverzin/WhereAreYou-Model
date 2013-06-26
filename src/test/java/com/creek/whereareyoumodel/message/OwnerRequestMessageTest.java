@@ -7,9 +7,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.creek.whereareyoumodel.domain.sendable.ContactResponse;
+import com.creek.whereareyoumodel.domain.sendable.ContactRequest;
+import com.creek.whereareyoumodel.domain.sendable.RequestCode;
 import com.creek.whereareyoumodel.util.JSONTransformer;
-import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
+import com.creek.whereareyoumodel.valueobject.OwnerRequest;
 
 /**
  * 
@@ -17,20 +18,20 @@ import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
  */
 public class OwnerRequestMessageTest {
     private static final String EMAIL = "aa@bb.cc";
-    private static final int REQUEST_CODE = 4;
+    private static final RequestCode REQUEST_CODE = RequestCode.LOCATION;
     private static final String REQUEST_MESSAGE = "Request message";
     
-    private OwnerRequestResponse ownerRequest;
+    private OwnerRequest ownerRequest;
     
     @Test
     public void shouldTransformMessage() throws ParseException {
         // given
         long timestamp = System.currentTimeMillis();
-        ContactResponse contactRequest = new ContactResponse();
+        ContactRequest contactRequest = new ContactRequest();
         contactRequest.setTimeSent(timestamp);
-        contactRequest.setCode(REQUEST_CODE);
+        contactRequest.setRequestCode(REQUEST_CODE);
         contactRequest.setMessage(REQUEST_MESSAGE);
-        ownerRequest = new OwnerRequestResponse(contactRequest);  
+        ownerRequest = new OwnerRequest(contactRequest);  
         
         RequestMessage message = new RequestMessage(ownerRequest, EMAIL);
 
@@ -45,10 +46,10 @@ public class OwnerRequestMessageTest {
 
         // then
         RequestMessage messageRes = new RequestMessage(value);
-        assertEquals(timestamp, messageRes.getOwnerRequestResponse().getTimeSent());
-        assertTrue(messageRes.getOwnerRequestResponse().getTimeSent() > 0);
-        assertEquals(REQUEST_CODE, messageRes.getOwnerRequestResponse().getCode());
-        assertEquals(REQUEST_MESSAGE, messageRes.getOwnerRequestResponse().getMessage());
+        assertEquals(timestamp, messageRes.getOwnerRequest().getTimeSent());
+        assertTrue(messageRes.getOwnerRequest().getTimeSent() > 0);
+        assertEquals(REQUEST_CODE.getCode(), messageRes.getOwnerRequest().getRequestCode());
+        assertEquals(REQUEST_MESSAGE, messageRes.getOwnerRequest().getMessage());
         assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, messageRes.getProductVersion());
     }
 }

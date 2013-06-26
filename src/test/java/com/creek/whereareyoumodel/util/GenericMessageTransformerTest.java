@@ -19,15 +19,19 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willThrow;
 
 import com.creek.whereareyoumodel.domain.LocationData;
+import com.creek.whereareyoumodel.domain.sendable.ContactRequest;
 import com.creek.whereareyoumodel.domain.sendable.ContactResponse;
+import com.creek.whereareyoumodel.domain.sendable.RequestCode;
+import com.creek.whereareyoumodel.domain.sendable.ResponseCode;
 import com.creek.whereareyoumodel.message.AbstractMessage;
 import com.creek.whereareyoumodel.message.GenericMessageTransformer;
 import com.creek.whereareyoumodel.message.OwnerLocationDataMessage;
 import com.creek.whereareyoumodel.message.RequestMessage;
 import com.creek.whereareyoumodel.message.ResponseMessage;
 import com.creek.whereareyoumodel.message.TransformException;
+import com.creek.whereareyoumodel.valueobject.OwnerRequest;
+import com.creek.whereareyoumodel.valueobject.OwnerResponse;
 import com.creek.whereareyoumodel.valueobject.SendableLocationData;
-import com.creek.whereareyoumodel.valueobject.OwnerRequestResponse;
 
 /**
  * 
@@ -49,9 +53,9 @@ public class GenericMessageTransformerTest {
     private JSONObject jsonObject;
     
     private RequestMessage requestMessage;
-    private OwnerRequestResponse ownerRequest;
+    private OwnerRequest ownerRequest;
     private ResponseMessage responseMessage;
-    private OwnerRequestResponse ownerResponse;
+    private OwnerResponse ownerResponse;
     private OwnerLocationDataMessage ownerLocationDataMessage;
     private SendableLocationData ownerLocationData;
     private LocationData locationData;
@@ -64,9 +68,9 @@ public class GenericMessageTransformerTest {
     private static final float SPEED = 20.5f;
     private static final boolean HAS_ACCURACY = true;
     private static final boolean HAS_SPEED = true;
-    private static final int REQUEST_CODE = 2;
+    private static final RequestCode REQUEST_CODE = RequestCode.LOCATION;
     private static final String REQUEST_MESSAGE = "Request message";
-    private static final int RESPONSE_CODE = 5;
+    private static final ResponseCode RESPONSE_CODE = ResponseCode.FAILURE;
     private static final String RESPONSE_MESSAGE = "Response message";
 
     @Before
@@ -81,11 +85,11 @@ public class GenericMessageTransformerTest {
     @Test
     public void shouldTransformOwnerLocationRequestMessage() throws TransformException, MessagingException, IOException {
         // given
-        ContactResponse contactRequest = new ContactResponse();
+        ContactRequest contactRequest = new ContactRequest();
         contactRequest.setTimeSent(timestamp);
-        contactRequest.setCode(REQUEST_CODE);
+        contactRequest.setRequestCode(REQUEST_CODE);
         contactRequest.setMessage(REQUEST_MESSAGE);
-        ownerRequest = new OwnerRequestResponse(contactRequest);  
+        ownerRequest = new OwnerRequest(contactRequest);  
         requestMessage = new RequestMessage(ownerRequest, EMAIL);
         given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(requestMessage.toJSON());
@@ -94,9 +98,9 @@ public class GenericMessageTransformerTest {
         RequestMessage msgReceived = (RequestMessage)messageTransformer.transform(msg);
         
         // then
-        assertEquals(timestamp, msgReceived.getOwnerRequestResponse().getTimeSent());
-        assertEquals(REQUEST_CODE, msgReceived.getOwnerRequestResponse().getCode());
-        assertEquals(REQUEST_MESSAGE, msgReceived.getOwnerRequestResponse().getMessage());
+        assertEquals(timestamp, msgReceived.getOwnerRequest().getTimeSent());
+        assertEquals(REQUEST_CODE.getCode(), msgReceived.getOwnerRequest().getRequestCode());
+        assertEquals(REQUEST_MESSAGE, msgReceived.getOwnerRequest().getMessage());
         assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, msgReceived.getProductVersion());
     }
     
@@ -136,9 +140,9 @@ public class GenericMessageTransformerTest {
         // given
         ContactResponse contactResponse = new ContactResponse();
         contactResponse.setTimeSent(timestamp);
-        contactResponse.setCode(RESPONSE_CODE);
+        contactResponse.setResponseCode(RESPONSE_CODE);
         contactResponse.setMessage(RESPONSE_MESSAGE);
-        ownerResponse = new OwnerRequestResponse(contactResponse);  
+        ownerResponse = new OwnerResponse(contactResponse);  
         responseMessage = new ResponseMessage(ownerResponse, EMAIL);
         given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(responseMessage.toJSON());
@@ -147,9 +151,9 @@ public class GenericMessageTransformerTest {
         ResponseMessage msgReceived = (ResponseMessage)messageTransformer.transform(msg);
         
         // then
-        assertEquals(timestamp, msgReceived.getOwnerRequestResponse().getTimeSent());
-        assertEquals(RESPONSE_CODE, msgReceived.getOwnerRequestResponse().getCode());
-        assertEquals(RESPONSE_MESSAGE, msgReceived.getOwnerRequestResponse().getMessage());
+        assertEquals(timestamp, msgReceived.getOwnerResponse().getTimeSent());
+        assertEquals(RESPONSE_CODE.getCode(), msgReceived.getOwnerResponse().getResponseCode());
+        assertEquals(RESPONSE_MESSAGE, msgReceived.getOwnerResponse().getMessage());
         assertEquals(AbstractMessage.CURRENT_PRODUCT_VERSION, msgReceived.getProductVersion());
     }
     

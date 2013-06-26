@@ -7,9 +7,6 @@ import com.creek.whereareyoumodel.domain.AbstractIdentifiable;
  * @author Andrey Pereverzin
  */
 public abstract class AbstractSendable extends AbstractIdentifiable {
-    public static final int SUCCESS = 0;
-    public static final int FAILURE = -1;
-
     private long timeCreated;
     private long timeSent;
     private long timeReceived;

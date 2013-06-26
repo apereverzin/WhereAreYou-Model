@@ -13,4 +13,6 @@ public interface ContactRequestRepository extends IdentifiableRepository<Contact
     List<ContactRequest> getContactRequestsByContactId(String contactId);
     List<ContactRequest> getContactRequestsByEmail(String email);
     List<ContactRequest> getUnsentContactRequests();
+    List<ContactRequest> getAllUnrespondedContactRequests();
+    List<ContactRequest> getUnrespondedLocationRequests();
 }

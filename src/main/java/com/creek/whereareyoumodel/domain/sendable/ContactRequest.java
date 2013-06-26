@@ -4,31 +4,37 @@ package com.creek.whereareyoumodel.domain.sendable;
  * 
  * @author Andrey Pereverzin
  */
-public class ContactRequest extends AbstractRequestResponse implements GenericRequestResponse {
-    private int code;
+public class ContactRequest extends AbstractSendable implements GenericRequest {
+    private RequestCode requestCode;
     private String message;
     private GenericResponse response;
 
-    public int getCode() {
-        return code;
+    @Override
+    public RequestCode getRequestCode() {
+        return requestCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    @Override
+    public void setRequestCode(RequestCode requestCode) {
+        this.requestCode = requestCode;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }
 
+    @Override
     public void setMessage(String message) {
         this.message = message;
     }
 
+    @Override
     public GenericResponse getResponse() {
         return response;
     }
 
+    @Override
     public void setResponse(GenericResponse response) {
         this.response = response;
     }
