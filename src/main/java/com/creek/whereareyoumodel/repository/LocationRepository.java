@@ -15,4 +15,5 @@ public interface LocationRepository extends IdentifiableRepository<LocationData>
     LocationData getLatestContactLocationDataByIdOfContact(String contactId);
     List<LocationData> getContactLocationDataByContactId(int contactId);
     LocationData getLatestContactLocationDataByContactId(int contactId);
+    LocationData getMyActualLocationData(int timeout);
 }
