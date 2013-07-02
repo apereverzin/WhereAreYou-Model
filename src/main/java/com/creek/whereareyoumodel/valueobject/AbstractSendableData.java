@@ -33,4 +33,11 @@ public abstract class AbstractSendableData implements Transformable {
         dataObject.put(TIME_SENT, Long.toString(getTimeSent()));
         return dataObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("timeSent=").append(timeSent);
+        return builder.toString();
+    }
 }

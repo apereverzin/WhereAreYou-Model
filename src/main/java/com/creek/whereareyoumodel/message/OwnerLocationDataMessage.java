@@ -3,6 +3,7 @@ package com.creek.whereareyoumodel.message;
 import org.json.simple.JSONObject;
 
 import com.creek.whereareyoumodel.valueobject.SendableLocationData;
+import static com.creek.whereareyoumodel.message.MessageType.OWNER_LOCATION_DATA_MESSAGE;
 
 /**
  * 
@@ -28,7 +29,7 @@ public class OwnerLocationDataMessage extends AbstractMessage {
         return ownerLocationData;
     }
 
-    public int getMessageType() {
+    public MessageType getMessageType() {
         return OWNER_LOCATION_DATA_MESSAGE;
     }
 
@@ -36,8 +37,14 @@ public class OwnerLocationDataMessage extends AbstractMessage {
     @SuppressWarnings("unchecked")
     public JSONObject toJSON() {
         JSONObject jsonObject = super.toJSON();
-        jsonObject.put(MESSAGE_TYPE, Integer.toString(getMessageType()));
         jsonObject.put(OWNER_LOCATION, ownerLocationData.toJSON());
         return jsonObject;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("OwnerLocationDataMessage [").append(super.toString()).append(", ownerLocationData=").append(ownerLocationData).append("]");
+        return builder.toString();
     }
 }

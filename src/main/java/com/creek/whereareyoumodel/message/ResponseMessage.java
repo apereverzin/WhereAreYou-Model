@@ -3,6 +3,7 @@ package com.creek.whereareyoumodel.message;
 import org.json.simple.JSONObject;
 
 import com.creek.whereareyoumodel.valueobject.OwnerResponse;
+import static com.creek.whereareyoumodel.message.MessageType.RESPONSE_MESSAGE;
 
 /**
  * 
@@ -24,7 +25,7 @@ public class ResponseMessage extends AbstractMessage {
     }
 
     @Override
-    public final int getMessageType() {
+    public final MessageType getMessageType() {
         return RESPONSE_MESSAGE;
     }
 
@@ -38,5 +39,12 @@ public class ResponseMessage extends AbstractMessage {
         JSONObject jsonObject = super.toJSON();
         jsonObject.put(RESPONSE, ownerResponse.toJSON());
         return jsonObject;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ResponseMessage [").append(super.toString()).append(", ownerResponse=").append(ownerResponse).append("]");
+        return builder.toString();
     }
 }

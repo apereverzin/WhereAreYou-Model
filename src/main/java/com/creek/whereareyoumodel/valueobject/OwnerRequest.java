@@ -37,4 +37,11 @@ public class OwnerRequest extends OwnerRequestResponse implements Transformable 
         dataObject.put(REQUEST_CODE, Integer.toString(getRequestCode()));
         return dataObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("OwnerRequest [").append(super.toString()).append(", requestCode=").append(requestCode).append("]");
+        return builder.toString();
+    }
 }

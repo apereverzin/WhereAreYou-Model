@@ -3,6 +3,7 @@ package com.creek.whereareyoumodel.message;
 import org.json.simple.JSONObject;
 
 import com.creek.whereareyoumodel.valueobject.OwnerRequest;
+import static com.creek.whereareyoumodel.message.MessageType.REQUEST_MESSAGE;
 
 /**
  * 
@@ -24,7 +25,7 @@ public class RequestMessage extends AbstractMessage {
     }
 
     @Override
-    public final int getMessageType() {
+    public final MessageType getMessageType() {
         return REQUEST_MESSAGE;
     }
 
@@ -38,5 +39,12 @@ public class RequestMessage extends AbstractMessage {
         JSONObject jsonObject = super.toJSON();
         jsonObject.put(REQUEST, ownerRequest.toJSON());
         return jsonObject;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("RequestMessage [").append(super.toString()).append(", ownerRequest=").append(ownerRequest).append("]");
+        return builder.toString();
     }
 }

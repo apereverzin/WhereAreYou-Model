@@ -6,6 +6,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import com.creek.whereareyoumodel.util.JSONTransformer;
+import static com.creek.whereareyoumodel.message.MessageType.REQUEST_MESSAGE;
+import static com.creek.whereareyoumodel.message.MessageType.RESPONSE_MESSAGE;
+import static com.creek.whereareyoumodel.message.MessageType.OWNER_LOCATION_DATA_MESSAGE;
 
 /**
  * 
@@ -27,20 +30,20 @@ public class GenericMessageTransformer {
     }
 
     public GenericMessage transform(Message msg) throws TransformException {
-        int messageType;
+        MessageType messageType;
 
         try {
             String content = (String) msg.getContent();
             parser.parse(content, transformer);
 
             JSONObject jsonObject = (JSONObject) transformer.getResult();
-            messageType = Integer.parseInt((String) jsonObject.get(AbstractMessage.MESSAGE_TYPE));
+            messageType = MessageType.getMessageType(Integer.parseInt((String) jsonObject.get(AbstractMessage.MESSAGE_TYPE)));
 
-            if (messageType == GenericMessage.REQUEST_MESSAGE) {
+            if (messageType == REQUEST_MESSAGE) {
                 return new RequestMessage(jsonObject);
-            } else if (messageType == GenericMessage.RESPONSE_MESSAGE) {
+            } else if (messageType == RESPONSE_MESSAGE) {
                 return new ResponseMessage(jsonObject);
-            } else if (messageType == GenericMessage.OWNER_LOCATION_DATA_MESSAGE) {
+            } else if (messageType == OWNER_LOCATION_DATA_MESSAGE) {
                 return new OwnerLocationDataMessage(jsonObject);
             } else {
                 throw new TransformException("Unknown message type " + messageType);

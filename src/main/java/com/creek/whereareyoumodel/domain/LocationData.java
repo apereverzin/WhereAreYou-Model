@@ -109,4 +109,12 @@ public class LocationData extends AbstractIdentifiable implements Transformable,
         dataObject.put(HAS_SPEED, Boolean.toString(hasSpeed()));
         return dataObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("LocationData [").append(super.toString()).append(", locationTime=").append(locationTime).append(", accuracy=").append(accuracy).append(", latitude=").append(latitude)
+                .append(", longitude=").append(longitude).append(", speed=").append(speed).append(", hasAccuracy=").append(hasAccuracy).append(", hasSpeed=").append(hasSpeed).append("]");
+        return builder.toString();
+    }
 }

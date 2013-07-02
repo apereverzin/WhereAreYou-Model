@@ -27,7 +27,7 @@ public abstract class AbstractMessage implements GenericMessage {
         this.senderEmail = (String)jsonObject.get(SENDER_EMAIL);
     }
 
-    public abstract int getMessageType();
+    public abstract MessageType getMessageType();
 
     @Override
     public String getProductVersion() {
@@ -43,9 +43,16 @@ public abstract class AbstractMessage implements GenericMessage {
     @SuppressWarnings("unchecked")
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(MESSAGE_TYPE, Integer.toString(getMessageType()));
+        jsonObject.put(MESSAGE_TYPE, Integer.toString(getMessageType().getType()));
         jsonObject.put(PRODUCT_VERSION, productVersion);
         jsonObject.put(SENDER_EMAIL, senderEmail);
         return jsonObject;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("productVersion=").append(productVersion).append(", senderEmail=").append(senderEmail);
+        return builder.toString();
     }
 }

@@ -38,4 +38,11 @@ public class OwnerResponse extends OwnerRequestResponse implements Transformable
         dataObject.put(RESPONSE_CODE, Integer.toString(getResponseCode()));
         return dataObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("OwnerResponse [").append(super.toString()).append(", responseCode=").append(responseCode).append("]");
+        return builder.toString();
+    }
 }

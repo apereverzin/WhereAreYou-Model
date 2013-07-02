@@ -38,4 +38,9 @@ public class ContactRequest extends AbstractSendable implements GenericRequest {
     public void setResponse(GenericResponse response) {
         this.response = response;
     }
+
+    @Override
+    public String toString() {
+        return "ContactRequest [" + super.toString() + ", requestCode=" + requestCode + ", message=" + message + "]";
+    }
 }

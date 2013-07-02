@@ -23,4 +23,11 @@ public class ContactData extends AbstractIdentifiable implements Identifiable {
     public void setRequestAllowed(boolean requestAllowed) {
         this.requestAllowed = requestAllowed;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ContactData [").append(super.toString()).append(", displayName=").append(displayName).append(", requestAllowed=").append(requestAllowed).append("]");
+        return builder.toString();
+    }
 }

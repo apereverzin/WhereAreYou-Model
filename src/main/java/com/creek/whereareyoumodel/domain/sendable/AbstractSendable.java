@@ -52,4 +52,9 @@ public abstract class AbstractSendable extends AbstractIdentifiable {
     public void setProcessed(boolean processed) {
         this.processed = processed;
     }
+
+    @Override
+    public String toString() {
+        return "timeCreated=" + timeCreated + ", timeSent=" + timeSent + ", timeReceived=" + timeReceived + ", resultCode=" + resultCode + ", processed=" + processed;
+    }
 }

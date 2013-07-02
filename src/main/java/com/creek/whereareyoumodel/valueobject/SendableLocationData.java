@@ -36,4 +36,11 @@ public class SendableLocationData extends AbstractSendableData implements Transf
         dataObject.put(LOCATION_DATA, locationData.toJSON());
         return dataObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("SendableLocationData [").append(super.toString()).append(", locationData=").append(locationData).append("]");
+        return builder.toString();
+    }
 }

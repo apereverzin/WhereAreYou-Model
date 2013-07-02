@@ -6,16 +6,16 @@ package com.creek.whereareyoumodel.domain;
  */
 public abstract class AbstractIdentifiable implements Identifiable {
 
-    private int id;
+    private long id;
     private ContactCompoundId contactCompoundId;
 
     @Override
-    public final int getId() {
+    public final long getId() {
         return id;
     }
 
     @Override
-    public final void setId(int id) {
+    public final void setId(long id) {
         this.id = id;
     }
 
@@ -33,7 +33,7 @@ public abstract class AbstractIdentifiable implements Identifiable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + (int) (id ^ (id >>> 32));
         return result;
     }
 
@@ -49,5 +49,12 @@ public abstract class AbstractIdentifiable implements Identifiable {
         if (id != other.id)
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("id=").append(id).append(", contactCompoundId=").append(contactCompoundId);
+        return builder.toString();
     }
 }

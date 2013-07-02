@@ -20,4 +20,11 @@ public class ContactCompoundId {
     public String getContactEmail() {
         return contactEmail;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ContactCompoundId [contactId=").append(contactId).append(", contactEmail=").append(contactEmail).append("]");
+        return builder.toString();
+    }
 }

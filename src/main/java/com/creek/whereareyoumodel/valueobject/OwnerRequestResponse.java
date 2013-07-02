@@ -37,4 +37,11 @@ public abstract class OwnerRequestResponse extends AbstractSendableData implemen
         dataObject.put(MESSAGE, getMessage());
         return dataObject;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.toString()).append(", message=").append(message);
+        return builder.toString();
+    }
 }
