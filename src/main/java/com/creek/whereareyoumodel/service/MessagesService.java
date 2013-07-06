@@ -44,11 +44,13 @@ public class MessagesService {
     public Set<GenericMessage> receiveMessages() throws TransformException, ServiceException {
         try {
             Set<GenericMessage> locations = new HashSet<GenericMessage>();
-            Set<Message> messages = mailConnector.receiveMessages(WHERE_ARE_YOU_SUBJECT);
+            Set<Object> messages = mailConnector.receiveMessages(WHERE_ARE_YOU_SUBJECT);
             
-            for(Message msg: messages) {
-                GenericMessage contactLocationData = messageTransformer.transform(msg);
-                locations.add(contactLocationData);
+            for (Object msg: messages) {
+                if (msg instanceof String) {
+                    GenericMessage contactLocationData = messageTransformer.transform((String)msg);
+                    locations.add(contactLocationData);
+                }
             }
             
             return locations;

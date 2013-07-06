@@ -29,11 +29,10 @@ public class GenericMessageTransformer {
         this.transformer = transformer;
     }
 
-    public GenericMessage transform(Message msg) throws TransformException {
+    public GenericMessage transform(String content) throws TransformException {
         MessageType messageType;
 
         try {
-            String content = (String) msg.getContent();
             parser.parse(content, transformer);
 
             JSONObject jsonObject = (JSONObject) transformer.getResult();

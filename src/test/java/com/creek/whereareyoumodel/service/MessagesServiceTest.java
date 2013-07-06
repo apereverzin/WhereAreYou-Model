@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.mail.Message;
-
 import org.json.simple.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,10 +42,8 @@ public class MessagesServiceTest {
     @Mock
     private OwnerLocationDataMessage ownerLocationDataMessage;
     
-    @Mock
-    private Message message1;
-    @Mock
-    private Message message2;
+    private String message1 = "a";
+    private String message2 = "b";
     
     @Before
     public void setUp() {
@@ -60,11 +56,11 @@ public class MessagesServiceTest {
     @Test
     public void shouldReceiveMessagesSuccessfully() throws ConnectorException, ServiceException, TransformException {
         // given
-        Set<Message> messages = new HashSet<Message>();
+        Set<Object> messages = new HashSet<Object>();
         messages.add(message1);
         messages.add(message2);
         given(connector.receiveMessages(MessagesService.WHERE_ARE_YOU_SUBJECT)).willReturn(messages);
-        given(messageTransformer.transform(any(Message.class))).willReturn(ownerResponseMessage).willReturn(ownerLocationDataMessage);
+        given(messageTransformer.transform(any(String.class))).willReturn(ownerResponseMessage).willReturn(ownerLocationDataMessage);
         
         // when
         Set<GenericMessage> messagesReceived = service.receiveMessages();
@@ -76,10 +72,10 @@ public class MessagesServiceTest {
     @Test(expected=TransformException.class)
     public void shouldThrowTransformExceptionIfTransformExceptionThrownWhenReceivingMessages() throws ConnectorException, ServiceException, TransformException {
         // given
-        Set<Message> messages = new HashSet<Message>();
+        Set<Object> messages = new HashSet<Object>();
         messages.add(message1);
         given(connector.receiveMessages(MessagesService.WHERE_ARE_YOU_SUBJECT)).willReturn(messages);
-        given(messageTransformer.transform(any(Message.class))).willThrow(new TransformException(""));
+        given(messageTransformer.transform(any(String.class))).willThrow(new TransformException(""));
         
         // when
         service.receiveMessages();

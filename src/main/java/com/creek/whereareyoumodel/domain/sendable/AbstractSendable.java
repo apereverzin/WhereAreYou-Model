@@ -55,6 +55,6 @@ public abstract class AbstractSendable extends AbstractIdentifiable {
 
     @Override
     public String toString() {
-        return "timeCreated=" + timeCreated + ", timeSent=" + timeSent + ", timeReceived=" + timeReceived + ", resultCode=" + resultCode + ", processed=" + processed;
+        return super.toString() + ", timeCreated=" + timeCreated + ", timeSent=" + timeSent + ", timeReceived=" + timeReceived + ", resultCode=" + resultCode + ", processed=" + processed;
     }
 }

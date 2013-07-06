@@ -27,4 +27,11 @@ public class ContactResponse extends AbstractResponse implements GenericResponse
     public void setLocationData(LocationData locationData) {
         this.locationData = locationData;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ContactResponse [").append(super.toString()).append(", message=").append(message).append(", locationData=").append(locationData).append("]");
+        return builder.toString();
+    }
 }

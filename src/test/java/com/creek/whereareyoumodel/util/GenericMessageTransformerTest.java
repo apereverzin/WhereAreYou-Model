@@ -2,7 +2,6 @@ package com.creek.whereareyoumodel.util;
 
 import java.io.IOException;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
 
 import org.json.simple.JSONObject;
@@ -47,9 +46,6 @@ public class GenericMessageTransformerTest {
     private JSONTransformer transformer;
     
     @Mock
-    private Message msg;
-    
-    @Mock
     private JSONObject jsonObject;
     
     private RequestMessage requestMessage;
@@ -91,11 +87,10 @@ public class GenericMessageTransformerTest {
         contactRequest.setMessage(REQUEST_MESSAGE);
         ownerRequest = new OwnerRequest(contactRequest);  
         requestMessage = new RequestMessage(ownerRequest, EMAIL);
-        given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(requestMessage.toJSON());
         
         // when
-        RequestMessage msgReceived = (RequestMessage)messageTransformer.transform(msg);
+        RequestMessage msgReceived = (RequestMessage)messageTransformer.transform("");
         
         // then
         assertEquals(timestamp, msgReceived.getOwnerRequest().getTimeSent());
@@ -117,11 +112,10 @@ public class GenericMessageTransformerTest {
         locationData.setHasSpeed(HAS_SPEED);
         ownerLocationData = new SendableLocationData(timestamp, locationData);  
         ownerLocationDataMessage = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
-        given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(ownerLocationDataMessage.toJSON());
         
         // when
-        OwnerLocationDataMessage msgReceived = (OwnerLocationDataMessage)messageTransformer.transform(msg);
+        OwnerLocationDataMessage msgReceived = (OwnerLocationDataMessage)messageTransformer.transform("");
         
         // then
         assertEquals(timestamp, msgReceived.getOwnerLocationData().getTimeSent());
@@ -144,11 +138,10 @@ public class GenericMessageTransformerTest {
         contactResponse.setMessage(RESPONSE_MESSAGE);
         ownerResponse = new OwnerResponse(contactResponse);  
         responseMessage = new ResponseMessage(ownerResponse, EMAIL);
-        given(msg.getContent()).willReturn("");
         given(transformer.getResult()).willReturn(responseMessage.toJSON());
         
         // when
-        ResponseMessage msgReceived = (ResponseMessage)messageTransformer.transform(msg);
+        ResponseMessage msgReceived = (ResponseMessage)messageTransformer.transform("");
         
         // then
         assertEquals(timestamp, msgReceived.getOwnerResponse().getTimeSent());
@@ -158,37 +151,12 @@ public class GenericMessageTransformerTest {
     }
     
     @Test(expected=TransformException.class)
-    public void shouldThrowTransformExceptionIfMessagingException() throws TransformException, MessagingException, IOException {
-        // given
-        given(msg.getContent()).willThrow(new MessagingException());
-        
-        // when
-        messageTransformer.transform(msg);
-        
-        // then
-        // throw exception
-    }
-    
-    @Test(expected=TransformException.class)
-    public void shouldThrowTransformExceptionIfIOException() throws TransformException, MessagingException, IOException {
-        // given
-        given(msg.getContent()).willThrow(new IOException());
-        
-        // when
-        messageTransformer.transform(msg);
-        
-        // then
-        // throw exception
-    }
-    
-    @Test(expected=TransformException.class)
     public void shouldThrowTransformExceptionIfParseException() throws TransformException, MessagingException, IOException, ParseException {
         // given
-        given(msg.getContent()).willReturn("");
         willThrow(new ParseException(0)).given(parser).parse("", transformer);
         
         // when
-        messageTransformer.transform(msg);
+        messageTransformer.transform("");
         
         // then
         // throw exception

@@ -27,4 +27,11 @@ public abstract class AbstractResponse extends AbstractSendable implements Gener
     public void setRequest(ContactRequest request) {
         this.request = request;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.toString()).append(", responseCode=").append(responseCode).append(", request=").append(request);
+        return builder.toString();
+    }
 }
