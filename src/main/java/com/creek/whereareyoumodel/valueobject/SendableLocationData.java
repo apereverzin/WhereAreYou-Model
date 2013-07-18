@@ -15,8 +15,8 @@ public class SendableLocationData extends AbstractSendableData implements Transf
 
     private static final String LOCATION_DATA = "locationData";
 
-    public SendableLocationData(long timeSent, LocationData locationData) {
-        super(timeSent);
+    public SendableLocationData(LocationData locationData) {
+        super(System.currentTimeMillis());
         this.locationData = locationData;
     }
 

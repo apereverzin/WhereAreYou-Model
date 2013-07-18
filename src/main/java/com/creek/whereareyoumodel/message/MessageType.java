@@ -1,7 +1,5 @@
 package com.creek.whereareyoumodel.message;
 
-import com.creek.whereareyoumodel.domain.sendable.RequestCode;
-
 /**
  * 
  * @author Andrey Pereverzin

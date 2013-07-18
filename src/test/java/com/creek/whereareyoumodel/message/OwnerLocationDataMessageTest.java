@@ -30,7 +30,6 @@ public class OwnerLocationDataMessageTest {
     @Test
     public void shouldTransformMessage() throws ParseException {
         // given
-        long timestamp = System.currentTimeMillis();
         locationData = new LocationData();
         locationData.setLocationTime(System.currentTimeMillis());
         locationData.setAccuracy(ACCURACY);
@@ -39,7 +38,7 @@ public class OwnerLocationDataMessageTest {
         locationData.setSpeed(SPEED);
         locationData.setHasAccuracy(HAS_ACCURACY);
         locationData.setHasSpeed(HAS_SPEED);
-        ownerLocationData = new SendableLocationData(timestamp, locationData);  
+        ownerLocationData = new SendableLocationData(locationData);  
         
         OwnerLocationDataMessage message = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
 
@@ -54,7 +53,7 @@ public class OwnerLocationDataMessageTest {
         
         // then
         OwnerLocationDataMessage messageRes = new OwnerLocationDataMessage(value);
-        assertEquals(timestamp, messageRes.getOwnerLocationData().getTimeSent());
+        assertTrue(messageRes.getOwnerLocationData().getTimeSent() > 0);
         assertTrue(messageRes.getOwnerLocationData().getLocationData().getLocationTime() > 0);
         assertEquals(ACCURACY, messageRes.getOwnerLocationData().getLocationData().getAccuracy());
         assertEquals(LATITUDE, messageRes.getOwnerLocationData().getLocationData().getLatitude());

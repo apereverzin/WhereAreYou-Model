@@ -110,7 +110,7 @@ public class GenericMessageTransformerTest {
         locationData.setSpeed(SPEED);
         locationData.setHasAccuracy(HAS_ACCURACY);
         locationData.setHasSpeed(HAS_SPEED);
-        ownerLocationData = new SendableLocationData(timestamp, locationData);  
+        ownerLocationData = new SendableLocationData(locationData);  
         ownerLocationDataMessage = new OwnerLocationDataMessage(ownerLocationData, EMAIL);
         given(transformer.getResult()).willReturn(ownerLocationDataMessage.toJSON());
         
@@ -118,7 +118,7 @@ public class GenericMessageTransformerTest {
         OwnerLocationDataMessage msgReceived = (OwnerLocationDataMessage)messageTransformer.transform("");
         
         // then
-        assertEquals(timestamp, msgReceived.getOwnerLocationData().getTimeSent());
+        assertTrue(msgReceived.getOwnerLocationData().getTimeSent() > 0);
         assertTrue(msgReceived.getOwnerLocationData().getLocationData().getLocationTime() > 0);
         assertEquals(ACCURACY, msgReceived.getOwnerLocationData().getLocationData().getAccuracy());
         assertEquals(LATITUDE, msgReceived.getOwnerLocationData().getLocationData().getLatitude());

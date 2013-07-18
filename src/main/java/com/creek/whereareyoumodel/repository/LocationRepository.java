@@ -9,6 +9,7 @@ import com.creek.whereareyoumodel.domain.LocationData;
  * @author Andrey Pereverzin
  */
 public interface LocationRepository extends IdentifiableRepository<LocationData> {
+    LocationData getLocationDataById(long id);
     List<LocationData> getContactLocationDataByEmail(String email);
     LocationData getLatestContactLocationDataByEmail(String email);
     List<LocationData> getContactLocationDataByIdOfContact(String contactId);
