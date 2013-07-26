@@ -7,7 +7,7 @@ package com.creek.whereareyoumodel.domain.sendable;
 public enum RequestCode {
     LOCATION(1);
 
-    private int code;
+    private final int code;
 
     private RequestCode(int code) {
         this.code = code;

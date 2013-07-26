@@ -1,33 +1,41 @@
 package com.creek.whereareyoumodel.domain;
 
+import static com.creek.whereareyoumodel.domain.RequestAllowance.NEVER;
+import static com.creek.whereareyoumodel.domain.RequestAllowance.ALWAYS;
+import static com.creek.whereareyoumodel.domain.RequestAllowance.RESTRICTED;
+
 /**
  * 
  * @author Andrey Pereverzin
  */
 public class ContactData extends AbstractIdentifiable implements Identifiable {
-    private String displayName;
-    private boolean requestAllowed;
+    private RequestAllowance requestAllowance = NEVER;
+    private long allowanceDate = -1L;
 
-    public String getDisplayName() {
-        return displayName;
+    public RequestAllowance getRequestAllowance() {
+        return requestAllowance;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setRequestAllowance(RequestAllowance requestAllowance) {
+        this.requestAllowance = requestAllowance;
+    }
+
+    public long getAllowanceDate() {
+        return allowanceDate;
+    }
+
+    public void setAllowanceDate(long allowanceDate) {
+        this.allowanceDate = allowanceDate;
     }
 
     public boolean isRequestAllowed() {
-        return requestAllowed;
+        return ALWAYS == requestAllowance || RESTRICTED == requestAllowance && System.currentTimeMillis() <= allowanceDate;
     }
-
-    public void setRequestAllowed(boolean requestAllowed) {
-        this.requestAllowed = requestAllowed;
-    }
-
+    
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("ContactData [").append(super.toString()).append(", displayName=").append(displayName).append(", requestAllowed=").append(requestAllowed).append("]");
+        builder.append("ContactData [").append(super.toString()).append(", requestAllowance=").append(requestAllowance).append(", allowanceDate=").append(allowanceDate).append("]");
         return builder.toString();
     }
 }

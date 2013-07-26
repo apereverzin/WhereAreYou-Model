@@ -9,7 +9,7 @@ public enum MessageType {
     RESPONSE_MESSAGE(111),
     OWNER_LOCATION_DATA_MESSAGE(112);
 
-    private int type;
+    private final int type;
 
     private MessageType(int type) {
         this.type = type;

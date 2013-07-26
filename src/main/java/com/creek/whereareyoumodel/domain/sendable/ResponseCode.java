@@ -8,7 +8,7 @@ public enum ResponseCode {
     SUCCESS(0),
     FAILURE(-1);
 
-    private int code;
+    private final int code;
 
     private ResponseCode(int code) {
         this.code = code;

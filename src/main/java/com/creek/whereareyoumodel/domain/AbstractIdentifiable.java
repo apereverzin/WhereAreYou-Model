@@ -5,7 +5,6 @@ package com.creek.whereareyoumodel.domain;
  * @author Andrey Pereverzin
  */
 public abstract class AbstractIdentifiable implements Identifiable {
-
     private long id;
     private ContactCompoundId contactCompoundId;
 
