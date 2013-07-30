@@ -6,7 +6,7 @@ package com.creek.whereareyoumodel.domain;
  */
 public class ContactCompoundId {
     private final String contactId;
-    private final String contactEmail;
+    private String contactEmail;
 
     public ContactCompoundId(String contactId, String contactEmail) {
         this.contactId = contactId;
@@ -19,6 +19,10 @@ public class ContactCompoundId {
 
     public String getContactEmail() {
         return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
     }
 
     @Override

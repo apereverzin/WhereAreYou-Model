@@ -2,7 +2,6 @@ package com.creek.whereareyoumodel.domain;
 
 import static com.creek.whereareyoumodel.domain.RequestAllowance.NEVER;
 import static com.creek.whereareyoumodel.domain.RequestAllowance.ALWAYS;
-import static com.creek.whereareyoumodel.domain.RequestAllowance.RESTRICTED;
 
 /**
  * 
@@ -29,7 +28,7 @@ public class ContactData extends AbstractIdentifiable implements Identifiable {
     }
 
     public boolean isRequestAllowed() {
-        return ALWAYS == requestAllowance || RESTRICTED == requestAllowance && System.currentTimeMillis() <= allowanceDate;
+        return ALWAYS == requestAllowance;
     }
     
     @Override
