@@ -6,8 +6,7 @@ package com.creek.whereareyoumodel.domain;
  */
 public enum RequestAllowance {
     NEVER(0),
-    BY_REQUEST(1),
-    ALWAYS(2);
+    ALWAYS(1);
     
     private final int code;
 
