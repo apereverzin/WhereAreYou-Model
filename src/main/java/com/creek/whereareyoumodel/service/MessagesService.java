@@ -21,14 +21,14 @@ public class MessagesService {
     
     static final String WHERE_ARE_YOU_SUBJECT = "WhereAreYou";
 
-    public MessagesService(Properties mailProps) {
-        this.mailConnector = new MailConnector(mailProps);
+    public MessagesService(Properties _mailProps) {
+        this.mailConnector = new MailConnector(_mailProps);
         this.messageTransformer = new GenericMessageTransformer();
     }
 
-    public MessagesService(Properties mailProps, GenericMessageTransformer messageTransformer) {
-        this.mailConnector = new MailConnector(mailProps);
-        this.messageTransformer = messageTransformer;
+    public MessagesService(Properties _mailProps, GenericMessageTransformer _messageTransformer) {
+        this.mailConnector = new MailConnector(_mailProps);
+        this.messageTransformer = _messageTransformer;
     }
     
     public void sendMessage(AbstractMessage message, String... emails) throws ServiceException {
@@ -57,7 +57,7 @@ public class MessagesService {
         }
     }
     
-    public void setMailConnector(MailConnector mailConnector) {
-        this.mailConnector = mailConnector;
+    public void setMailConnector(MailConnector _mailConnector) {
+        this.mailConnector = _mailConnector;
     }
 }
