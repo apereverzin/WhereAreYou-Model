@@ -1,7 +1,6 @@
 package com.creek.whereareyoumodel.service;
 
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.Set;
 
 import com.creek.accessemail.connector.mail.ConnectorException;
@@ -21,13 +20,13 @@ public class MessagesService {
     
     static final String WHERE_ARE_YOU_SUBJECT = "WhereAreYou";
 
-    public MessagesService(Properties _mailProps) {
-        this.mailConnector = new MailConnector(_mailProps);
+    public MessagesService(MailConnector _mailConnector) {
+        this.mailConnector = _mailConnector;
         this.messageTransformer = new GenericMessageTransformer();
     }
 
-    public MessagesService(Properties _mailProps, GenericMessageTransformer _messageTransformer) {
-        this.mailConnector = new MailConnector(_mailProps);
+    public MessagesService(MailConnector _mailConnector, GenericMessageTransformer _messageTransformer) {
+        this.mailConnector = _mailConnector;
         this.messageTransformer = _messageTransformer;
     }
     
@@ -55,9 +54,5 @@ public class MessagesService {
         } catch(ConnectorException ex) {
             throw new ServiceException(ex);
         }
-    }
-    
-    public void setMailConnector(MailConnector _mailConnector) {
-        this.mailConnector = _mailConnector;
     }
 }

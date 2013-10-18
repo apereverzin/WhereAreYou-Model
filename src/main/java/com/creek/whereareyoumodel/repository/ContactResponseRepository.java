@@ -13,4 +13,6 @@ public interface ContactResponseRepository<T extends ContactResponse> extends Id
     List<ContactResponse> getContactResponsesByContactId(String contactId);
     List<ContactResponse> getContactResponsesByEmail(String email);
     List<ContactResponse> getUnsentContactResponses();
+    List<String> getEmailAddressesForResponsesEverSent();
+    List<String> getEmailAddressesForResponsesEverReceived();
 }

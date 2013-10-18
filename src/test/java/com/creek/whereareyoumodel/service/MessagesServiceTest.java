@@ -49,8 +49,7 @@ public class MessagesServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         
-        service = new MessagesService(new Properties(), messageTransformer);
-        service.setMailConnector(connector);
+        service = new MessagesService(connector, messageTransformer);
     }
     
     @Test
